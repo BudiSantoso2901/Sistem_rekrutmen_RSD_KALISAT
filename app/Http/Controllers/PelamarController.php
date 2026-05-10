@@ -416,7 +416,7 @@ class PelamarController extends Controller
             ->where('token', $token)
             ->firstOrFail();
 
-        return view('pelamar.hasil', [
+        return view('Pelamar.hasil', [
             'pelamar' => $pelamar,
             'username' => $pelamar->username,
             'nomor_peserta' => $pelamar->nomer_peserta,
