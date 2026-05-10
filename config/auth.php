@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'pelamar' => [
+            'driver'   => 'session',
+            'provider' => 'pelamars',
+        ],
     ],
 
     /*
@@ -64,7 +68,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
+        'pelamars' => [
+            'driver' => 'eloquent',
+            'model'  => App\Models\Pelamar::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -95,6 +102,12 @@ return [
             'provider' => 'users',
             'table' => 'password_reset_tokens',
             'expire' => 60,
+            'throttle' => 60,
+        ],
+        'pelamars' => [
+            'provider' => 'pelamars',
+            'table'    => 'password_reset_tokens',
+            'expire'   => 60,
             'throttle' => 60,
         ],
     ],

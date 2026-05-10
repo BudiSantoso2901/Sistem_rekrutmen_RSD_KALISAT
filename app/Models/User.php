@@ -19,7 +19,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
+        'role',
         'password',
     ];
 
@@ -41,4 +43,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function kuis()
+    {
+        return $this->hasMany(Kuis::class, 'dibuat_oleh');
+    }
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
 }
