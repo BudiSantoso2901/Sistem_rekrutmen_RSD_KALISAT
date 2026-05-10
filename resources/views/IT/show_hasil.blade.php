@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 
 @section('title', 'Detail Hasil Kuis — ' . ($pengerjaan->pelamar?->nama ?? ''))
 @section('page-title', 'Detail Hasil Kuis')
