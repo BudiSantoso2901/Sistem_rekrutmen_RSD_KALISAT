@@ -2299,6 +2299,9 @@
                             </div>
 
                             <div class="hospital-social">
+                                <a href="https://www.tiktok.com/@rsdkalisat" target="_blank">
+                                    <i class="fab fa-tiktok"></i>
+                                </a>
                                 <a href="https://www.facebook.com/profile.php?id=61574390483671">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
