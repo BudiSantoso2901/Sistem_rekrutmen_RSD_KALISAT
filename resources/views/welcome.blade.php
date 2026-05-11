@@ -1834,6 +1834,97 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 18px rgba(255, 180, 0, .35);
         }
+
+        .hospital-simple-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 28px;
+        }
+
+        .hospital-simple-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 16px 18px;
+            border-radius: 18px;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            transition: .3s ease;
+        }
+
+        .hospital-simple-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .06);
+        }
+
+        .hospital-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .hospital-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .hospital-left h4 {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .hospital-left span {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .hospital-social {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hospital-social a {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: #f3f4f6;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: .3s ease;
+        }
+
+        .hospital-social a:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .mini-alert {
+            margin-top: 22px;
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: #eff6ff;
+            color: #1e40af;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
     </style>
 </head>
 
@@ -2174,98 +2265,108 @@
     <section class="form-section" id="daftar">
         <div class="section-inner">
             <div class="form-grid">
+                <!-- INFORMASI SINGKAT -->
                 <div class="form-info reveal">
 
                     <div class="section-tag">
-                        <i class="fas fa-exclamation-circle"></i>
-                        Informasi Penting
+                        <i class="fas fa-info-circle"></i>
+                        Informasi
                     </div>
 
                     <h2>
-                        Sebelum <span style="color:var(--accent)">Melamar</span>
+                        Rekrutmen <span style="color:var(--accent)">Rumah Sakit</span>
                     </h2>
 
                     <p class="section-sub">
-                        Ikuti dan dukung media sosial resmi kami terlebih dahulu untuk mendapatkan informasi terbaru
-                        seputar rekrutmen, pelayanan, dan kegiatan rumah sakit.
+                        Pilih rumah sakit tujuan pada formulir pendaftaran.
+                        Pastikan data yang diisi benar dan aktif untuk proses seleksi. Follow media sosial resmi rumah sakit untuk update informasi rekrutmen.
                     </p>
 
-                    <!-- SOCIAL MEDIA -->
-                    <div class="follow-box">
+                    <!-- LIST RS -->
+                    <div class="hospital-simple-list">
 
-                        <div class="follow-title">
-                            <i class="fas fa-bullhorn"></i>
-                            Follow & Support Media Sosial Kami
+                        <!-- ITEM -->
+                        <div class="hospital-simple-item">
+                            <div class="hospital-left">
+                                <div class="hospital-badge">
+                                    <i class="fas fa-hospital"></i>
+                                </div>
+
+                                <div>
+                                    <h4>RSD Kalisat Jember</h4>
+                                    <span>Recruitment & Information</span>
+                                </div>
+                            </div>
+
+                            <div class="hospital-social">
+                                <a href="https://www.facebook.com/profile.php?id=61574390483671">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://www.instagram.com/rsdkalisatjember/" target="_blank">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+
+                                <a href="https://maps.app.goo.gl/McWTfzCzZf1ZNjcW9" target="_blank">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </a>
+                            </div>
                         </div>
 
-                        <div class="social-follow-list">
-
-                            <a href="https://www.instagram.com/rsdkalisatjember/" target="_blank"
-                                class="social-follow-item instagram">
-                                <i class="fab fa-instagram"></i>
-                                <div>
-                                    <strong>Instagram</strong>
-                                    <span>@rsdkalisatjember</span>
+                        <!-- ITEM -->
+                        <div class="hospital-simple-item">
+                            <div class="hospital-left">
+                                <div class="hospital-badge">
+                                    <i class="fas fa-hospital"></i>
                                 </div>
-                            </a>
 
-                            <a href="https://www.facebook.com/profile.php?id=61574390483671" target="_blank"
-                                class="social-follow-item facebook">
-                                <i class="fab fa-facebook-f"></i>
                                 <div>
-                                    <strong>Facebook</strong>
-                                    <span>RSD Kalisat Jember</span>
+                                    <h4>RSD Dr.Soebandi</h4>
+                                    <span>Recruitment & Information</span>
                                 </div>
-                            </a>
+                            </div>
 
-                            <a href="https://www.tiktok.com/@rsdkalisat" target="_blank"
-                                class="social-follow-item tiktok">
-                                <i class="fab fa-tiktok"></i>
-                                <div>
-                                    <strong>TikTok</strong>
-                                    <span>@rsdkalisat</span>
-                                </div>
-                            </a>
+                            <div class="hospital-social">
+                                <a href="https://www.instagram.com/rsddrsoebandi/">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
 
-                            <a href="https://www.youtube.com/@rsdkalisatjember" target="_blank"
-                                class="social-follow-item youtube">
-                                <i class="fab fa-youtube"></i>
-                                <div>
-                                    <strong>YouTube</strong>
-                                    <span>RSD Kalisat Jember</span>
-                                </div>
-                            </a>
-
+                                <a href="https://maps.app.goo.gl/dLu5BxnphECJfg5R7">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </a>
+                            </div>
                         </div>
+
+                        <!-- ITEM -->
+                        <div class="hospital-simple-item">
+                            <div class="hospital-left">
+                                <div class="hospital-badge">
+                                    <i class="fas fa-hospital"></i>
+                                </div>
+
+                                <div>
+                                    <h4>RSD Balung</h4>
+                                    <span>Recruitment & Information</span>
+                                </div>
+                            </div>
+
+                            <div class="hospital-social">
+                                <a href="https://www.instagram.com/rsdbalungjember/">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+
+                                <a href="https://maps.app.goo.gl/jHdbqEDG3vjGXRRH9">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <!-- MAPS -->
-                    <div class="maps-review-box">
-
-                        <div class="maps-title">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Lokasi RSD Kalisat Jember
-                        </div>
-
-                        <p class="maps-text">
-                            Kunjungi lokasi kami atau berikan dukungan melalui ulasan Google Maps ⭐⭐⭐⭐⭐
-                        </p>
-
-                        <!-- EMBED MAP -->
-                        <div class="maps-frame">
-                            <iframe src="https://www.google.com/maps?q=RSD+Kalisat+Jember&output=embed" width="100%"
-                                height="260" style="border:0;" allowfullscreen="" loading="lazy">
-                            </iframe>
-                        </div>
-
-                        <!-- BUTTON -->
-                        <a href="https://maps.app.goo.gl/McWTfzCzZf1ZNjcW9" target="_blank" class="maps-review-btn">
-                            <i class="fas fa-star"></i>
-                            Beri Review 5 Bintang
-                        </a>
-
+                    <!-- ALERT -->
+                    <div class="mini-alert">
+                        <i class="fas fa-circle-check"></i>
+                        Dokumen pendukung akan diupload setelah pendaftaran berhasil.
                     </div>
-
 
                 </div>
 
