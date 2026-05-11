@@ -649,7 +649,7 @@ class PelamarController extends Controller
         'ijazah_transkrip'      => ['label' => 'Ijazah & Transkrip Nilai',           'icon' => 'fa-graduation-cap',   'required' => true],
         'ktp'                   => ['label' => 'Fotokopi KTP',                       'icon' => 'fa-id-card',          'required' => true],
         'pas_foto'              => ['label' => 'Pas Foto Terbaru',                   'icon' => 'fa-image',            'required' => true],
-        'str_sip'               => ['label' => 'STR (Tenaga Kesehatan)',             'icon' => 'fa-file-medical',     'required' => false],
+        'str_sip'               => ['label' => 'STR (Wajib bagi Tenaga Kesehatan)',             'icon' => 'fa-file-medical',     'required' => false],
         'sertifikat'            => ['label' => 'Sertifikat Pelatihan (Boleh Lebih dari 1)',  'icon' => 'fa-certificate',      'required' => false],
         'surat_pengalaman'      => ['label' => 'Surat Pengalaman Kerja',             'icon' => 'fa-briefcase',        'required' => false],
         'skck'                  => ['label' => 'SKCK',                               'icon' => 'fa-shield-halved',    'required' => true],
