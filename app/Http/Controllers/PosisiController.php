@@ -58,7 +58,7 @@ class PosisiController extends Controller
                 'kode_pelamar' => [
                     'required',
                     'string',
-                    Rule::unique('posisis', 'kode_pelamar')->ignore($request->id)
+                    'max:255',
                 ],
             ],
             [

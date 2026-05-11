@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::table('pelamars', function (Blueprint $table) {
             $table->text('catatan')->nullable()->after('status_pelamar');
-            $table->string('nik')->nullable()->after('username');
+            $table->string('nik')->unique()->after('username');
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan'])->after('nik');
             $table->string('no_str')->nullable()->after('jenis_kelamin');
             $table->enum('jenis_pelamar', ['nakes', 'non_nakes'])->after('no_str');

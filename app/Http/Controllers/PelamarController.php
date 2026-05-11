@@ -47,8 +47,8 @@ class PelamarController extends Controller
         // =========================
 
         $jenisPelamarMap = [
-            'nakes' => 1,
-            'non_nakes' => 2,
+            'nakes' => 'N',
+            'non_nakes' => 'NN',
         ];
 
         $pendidikanMap = [
@@ -528,7 +528,7 @@ class PelamarController extends Controller
         $request->validate([
             // 'status_pelamar' => 'required|in:lolos_berkas,tidak_lolos_berkas,diterima,ditolak',
             'status_pelamar' => 'required|in:diterima,ditolak',
-            'catatan' => 'nullable|string'
+            'catatan' => 'required|string'
         ]);
 
         DB::beginTransaction();
@@ -650,11 +650,11 @@ class PelamarController extends Controller
         'ktp'                   => ['label' => 'Fotokopi KTP',                       'icon' => 'fa-id-card',          'required' => true],
         'pas_foto'              => ['label' => 'Pas Foto Terbaru',                   'icon' => 'fa-image',            'required' => true],
         'str_sip'               => ['label' => 'STR (Tenaga Kesehatan)',             'icon' => 'fa-file-medical',     'required' => false],
-        'sertifikat'            => ['label' => 'Sertifikat Pelatihan / Kompetensi',  'icon' => 'fa-certificate',      'required' => false],
+        'sertifikat'            => ['label' => 'Sertifikat Pelatihan (Boleh Lebih dari 1)',  'icon' => 'fa-certificate',      'required' => false],
         'surat_pengalaman'      => ['label' => 'Surat Pengalaman Kerja',             'icon' => 'fa-briefcase',        'required' => false],
         'skck'                  => ['label' => 'SKCK',                               'icon' => 'fa-shield-halved',    'required' => true],
         'surat_sehat'           => ['label' => 'Surat Keterangan Sehat',             'icon' => 'fa-stethoscope',      'required' => true],
-        'surat_pernyataan'      => ['label' => 'Surat Pernyataan Kebenaran Dokumen', 'icon' => 'fa-file-signature',   'required' => true],
+        'surat_pernyataan'      => ['label' => 'Surat Pernyataan Keaslian Dokumen', 'icon' => 'fa-file-signature',   'required' => true],
         'surat_lamaran'         => ['label' => 'Surat Lamaran Pekerjaan',            'icon' => 'fa-file-signature',   'required' => true],
         'surat_tidak_menuntut_diangkat_asn'         => ['label' => 'Surat Pernyataan Tidak Menuntut Diangkat ASN',            'icon' => 'fa-file-signature',   'required' => true],
 

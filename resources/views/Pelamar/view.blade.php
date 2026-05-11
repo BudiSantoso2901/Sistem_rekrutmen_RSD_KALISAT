@@ -1659,8 +1659,8 @@
                         </label>
                     </div>
                 </div>
-                <label class="form-label-sm" for="catatanInput">Catatan (opsional)</label>
-                <textarea class="catatan-input" id="catatanInput" placeholder="Tambahkan alasan atau catatan..."></textarea>
+                <label class="form-label-sm" for="catatanInput">Catatan (wajib)</label>
+                <textarea class="catatan-input" id="catatanInput" placeholder="Tambahkan alasan atau catatan..." required></textarea>
                 <div class="modal-footer">
                     <button class="btn-cancel" onclick="closeModal()">Batal</button>
                     <button class="btn-submit" id="btnSubmitValidasi" onclick="submitValidasi()">

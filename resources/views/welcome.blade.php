@@ -2177,95 +2177,226 @@
                 <div class="form-info reveal">
 
                     <div class="section-tag">
-                        <i class="fas fa-exclamation-circle"></i>
-                        Informasi Penting
+                        <i class="fas fa-hospital"></i>
+                        Informasi Rumah Sakit
                     </div>
 
                     <h2>
-                        Sebelum <span style="color:var(--accent)">Melamar</span>
+                        Rekrutmen <span style="color:var(--accent)">RSD Kabupaten Jember</span>
                     </h2>
 
                     <p class="section-sub">
-                        Ikuti dan dukung media sosial resmi kami terlebih dahulu untuk mendapatkan informasi terbaru
-                        seputar rekrutmen, pelayanan, dan kegiatan rumah sakit.
+                        Silakan pilih rumah sakit tujuan untuk melihat informasi lokasi,
+                        media sosial resmi, serta dukungan review Google Maps.
                     </p>
 
-                    <!-- SOCIAL MEDIA -->
-                    <div class="follow-box">
+                    <!-- WRAPPER CARD -->
+                    <div class="hospital-card-wrapper">
 
-                        <div class="follow-title">
-                            <i class="fas fa-bullhorn"></i>
-                            Follow & Support Media Sosial Kami
+                        <!-- ================= RSD KALISAT ================= -->
+                        <div class="hospital-card">
+
+                            <div class="hospital-header">
+                                <div class="hospital-icon">
+                                    <i class="fas fa-hospital-alt"></i>
+                                </div>
+
+                                <div>
+                                    <h3>RSD Kalisat Jember</h3>
+                                    <span>Rumah Sakit Daerah</span>
+                                </div>
+                            </div>
+
+                            <!-- SOCIAL MEDIA -->
+                            <div class="follow-box">
+
+                                <div class="follow-title">
+                                    <i class="fas fa-bullhorn"></i>
+                                    Media Sosial Resmi
+                                </div>
+
+                                <div class="social-follow-list">
+
+                                    <a href="https://www.instagram.com/rsdkalisatjember/" target="_blank"
+                                        class="social-follow-item instagram">
+                                        <i class="fab fa-instagram"></i>
+                                        <div>
+                                            <strong>Instagram</strong>
+                                            <span>@rsdkalisatjember</span>
+                                        </div>
+                                    </a>
+
+                                    <a href="https://www.facebook.com/profile.php?id=61574390483671" target="_blank"
+                                        class="social-follow-item facebook">
+                                        <i class="fab fa-facebook-f"></i>
+                                        <div>
+                                            <strong>Facebook</strong>
+                                            <span>RSD Kalisat Jember</span>
+                                        </div>
+                                    </a>
+
+                                    <a href="https://www.tiktok.com/@rsdkalisat" target="_blank"
+                                        class="social-follow-item tiktok">
+                                        <i class="fab fa-tiktok"></i>
+                                        <div>
+                                            <strong>TikTok</strong>
+                                            <span>@rsdkalisat</span>
+                                        </div>
+                                    </a>
+
+                                    <a href="https://www.youtube.com/@rsdkalisatjember" target="_blank"
+                                        class="social-follow-item youtube">
+                                        <i class="fab fa-youtube"></i>
+                                        <div>
+                                            <strong>YouTube</strong>
+                                            <span>RSD Kalisat Jember</span>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+
+                            <!-- MAPS -->
+                            <div class="maps-review-box">
+
+                                <div class="maps-title">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Lokasi RSD Kalisat Jember
+                                </div>
+
+                                <div class="maps-frame">
+                                    <iframe src="https://www.google.com/maps?q=RSD+Kalisat+Jember&output=embed"
+                                        width="100%" height="220" style="border:0;" allowfullscreen=""
+                                        loading="lazy">
+                                    </iframe>
+                                </div>
+
+                                <a href="https://maps.app.goo.gl/McWTfzCzZf1ZNjcW9" target="_blank"
+                                    class="maps-review-btn">
+                                    <i class="fas fa-star"></i>
+                                    Review Google Maps
+                                </a>
+
+                            </div>
+
                         </div>
 
-                        <div class="social-follow-list">
+                        <!-- ================= RSD BALUNG ================= -->
+                        <div class="hospital-card">
 
-                            <a href="https://www.instagram.com/rsdkalisatjember/" target="_blank"
-                                class="social-follow-item instagram">
-                                <i class="fab fa-instagram"></i>
-                                <div>
-                                    <strong>Instagram</strong>
-                                    <span>@rsdkalisatjember</span>
+                            <div class="hospital-header">
+                                <div class="hospital-icon">
+                                    <i class="fas fa-hospital-alt"></i>
                                 </div>
-                            </a>
 
-                            <a href="https://www.facebook.com/profile.php?id=61574390483671" target="_blank"
-                                class="social-follow-item facebook">
-                                <i class="fab fa-facebook-f"></i>
                                 <div>
-                                    <strong>Facebook</strong>
-                                    <span>RSD Kalisat Jember</span>
+                                    <h3>RSD Balung</h3>
+                                    <span>Rumah Sakit Daerah</span>
                                 </div>
-                            </a>
+                            </div>
 
-                            <a href="https://www.tiktok.com/@rsdkalisat" target="_blank"
-                                class="social-follow-item tiktok">
-                                <i class="fab fa-tiktok"></i>
-                                <div>
-                                    <strong>TikTok</strong>
-                                    <span>@rsdkalisat</span>
-                                </div>
-                            </a>
+                            <!-- SOCIAL MEDIA -->
+                            <div class="follow-box">
 
-                            <a href="https://www.youtube.com/@rsdkalisatjember" target="_blank"
-                                class="social-follow-item youtube">
-                                <i class="fab fa-youtube"></i>
-                                <div>
-                                    <strong>YouTube</strong>
-                                    <span>RSD Kalisat Jember</span>
+                                <div class="follow-title">
+                                    <i class="fas fa-bullhorn"></i>
+                                    Media Sosial Resmi
                                 </div>
-                            </a>
+
+                                <div class="social-follow-list">
+
+                                    <!-- Nanti bisa ditambahkan -->
+                                    <div class="social-coming-soon">
+                                        <i class="fas fa-clock"></i>
+                                        Sosial media akan ditambahkan
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- MAPS -->
+                            <div class="maps-review-box">
+
+                                <div class="maps-title">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Lokasi RSD Balung
+                                </div>
+
+                                <div class="maps-frame">
+                                    <iframe src="https://www.google.com/maps?q=RSD+Balung&output=embed" width="100%"
+                                        height="220" style="border:0;" allowfullscreen="" loading="lazy">
+                                    </iframe>
+                                </div>
+
+                                <a href="https://maps.app.goo.gl/QqaMDHf3qrh5nzvH8" target="_blank"
+                                    class="maps-review-btn">
+                                    <i class="fas fa-star"></i>
+                                    Review Google Maps
+                                </a>
+
+                            </div>
 
                         </div>
+
+                        <!-- ================= RSD SOEBANDI ================= -->
+                        <div class="hospital-card">
+
+                            <div class="hospital-header">
+                                <div class="hospital-icon">
+                                    <i class="fas fa-hospital-alt"></i>
+                                </div>
+
+                                <div>
+                                    <h3>RSD dr. Soebandi</h3>
+                                    <span>Rumah Sakit Daerah</span>
+                                </div>
+                            </div>
+
+                            <!-- SOCIAL MEDIA -->
+                            <div class="follow-box">
+
+                                <div class="follow-title">
+                                    <i class="fas fa-bullhorn"></i>
+                                    Media Sosial Resmi
+                                </div>
+
+                                <div class="social-follow-list">
+
+                                    <!-- Nanti bisa ditambahkan -->
+                                    <div class="social-coming-soon">
+                                        <i class="fas fa-clock"></i>
+                                        Sosial media akan ditambahkan
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- MAPS -->
+                            <div class="maps-review-box">
+
+                                <div class="maps-title">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Lokasi RSD dr. Soebandi
+                                </div>
+
+                                <div class="maps-frame">
+                                    <iframe src="https://www.google.com/maps?q=RSD+dr+Soebandi+Jember&output=embed"
+                                        width="100%" height="220" style="border:0;" allowfullscreen=""
+                                        loading="lazy">
+                                    </iframe>
+                                </div>
+
+                                <a href="https://maps.app.goo.gl/AgKbEcr5yt2nskXG7" target="_blank"
+                                    class="maps-review-btn">
+                                    <i class="fas fa-star"></i>
+                                    Review Google Maps
+                                </a>
+
+                            </div>
+
+                        </div>
+
                     </div>
-
-                    <!-- MAPS -->
-                    <div class="maps-review-box">
-
-                        <div class="maps-title">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Lokasi RSD Kalisat Jember
-                        </div>
-
-                        <p class="maps-text">
-                            Kunjungi lokasi kami atau berikan dukungan melalui ulasan Google Maps ⭐⭐⭐⭐⭐
-                        </p>
-
-                        <!-- EMBED MAP -->
-                        <div class="maps-frame">
-                            <iframe src="https://www.google.com/maps?q=RSD+Kalisat+Jember&output=embed" width="100%"
-                                height="260" style="border:0;" allowfullscreen="" loading="lazy">
-                            </iframe>
-                        </div>
-
-                        <!-- BUTTON -->
-                        <a href="https://maps.app.goo.gl/McWTfzCzZf1ZNjcW9" target="_blank" class="maps-review-btn">
-                            <i class="fas fa-star"></i>
-                            Beri Review 5 Bintang
-                        </a>
-
-                    </div>
-
 
                 </div>
 
@@ -2518,27 +2649,20 @@
                                 </label>
 
                                 <select class="form-select" name="pengalaman_kerja" data-field="pengalaman_kerja">
-
-                                    <option value="fresh">
-                                        Fresh Graduate
+                                    <option value="" >
+                                        — Pilih Pengalaman —
+                                    </option>
+                                    <option value=" Kurang Dari 1 Tahun">
+                                        Kurang Dari 1 Tahun
                                     </option>
 
-                                    <option value="Kurang Lebih 6 Bulan">
-                                        Kurang Lebih 6 Bulan
+                                    <option value="1 - 3 Tahun">
+                                        1 – 3 Tahun
                                     </option>
 
-                                    <option value="1-2">
-                                        1 – 2 Tahun
+                                    <option value="Lebih dari 3 Tahun">
+                                        Lebih dari 3 Tahun
                                     </option>
-
-                                    <option value="3-5">
-                                        3 – 5 Tahun
-                                    </option>
-
-                                    <option value="5+">
-                                        Lebih dari 5 Tahun
-                                    </option>
-
                                 </select>
                             </div>
 
@@ -2679,7 +2803,7 @@
                 <div>
                     <a href="#" class="footer-logo">
                         <div class="footer-logo-icon"><i class="fas fa-heartbeat"></i></div>
-                       Rekrutment
+                        Rekrutment
                     </a>
                     <p class="footer-about">Platform rekrutmen resmi tenaga kesehatan profesional Indonesia. Kami
                         berkomitmen menghadirkan proses seleksi yang adil, transparan, dan bermartabat.</p>
