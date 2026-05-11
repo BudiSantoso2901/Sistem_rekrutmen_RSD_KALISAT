@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{{ asset('Lambang-kabupaten-jember.png') }}" type="image/x-icon">
-    <title>RSD KALISAT</title>
+    <title>Rekrutmen Kabupaten Jember</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
@@ -1844,7 +1844,7 @@
         <div class="nav-inner">
             <a href="#" class="nav-logo">
                 <input type="image" src="{{ asset('Lambang-kabupaten-jember.png') }}" alt="" width="50">
-                <em style="font-style:normal;color:var(--accent)">Rekrutment</em>
+                <em style="font-style:normal;color:var(--accent)">Kabupaten Jember</em>
             </a>
             <ul class="nav-links">
                 <li><a href="#beranda">Beranda</a></li>
