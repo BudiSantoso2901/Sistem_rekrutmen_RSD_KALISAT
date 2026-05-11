@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{{ asset('logo.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('Lambang-kabupaten-jember.png') }}" type="image/x-icon">
     <title>RSD KALISAT</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
@@ -1843,7 +1843,7 @@
     <nav id="navbar">
         <div class="nav-inner">
             <a href="#" class="nav-logo">
-                <input type="image" src="{{ asset('RS.png') }}" alt="" width="50">
+                <input type="image" src="{{ asset('Lambang-kabupaten-jember.png') }}" alt="" width="50">
                 <em style="font-style:normal;color:var(--accent)">Rekrutment</em>
             </a>
             <ul class="nav-links">
@@ -1873,7 +1873,7 @@
         <div class="hero-inner">
             <div class="hero-content">
                 {{-- <div class="hero-badge"><i class="fas fa-star"></i> Rekrutmen Resmi 2025</div> --}}
-                <h1>Wujudkan Karir <span>Kesehatan</span> Impianmu Bersama RSD KALISAT</h1>
+                <h1>Wujudkan Karir <span>Kesehatan</span> Impianmu</h1>
                 <p class="hero-desc">
                     Bergabunglah dengan tim profesional medis terbaik Indonesia. Kami mencari tenaga kesehatan
                     berdedikasi yang siap memberikan pelayanan terbaik bagi masyarakat.
@@ -2679,7 +2679,7 @@
                 <div>
                     <a href="#" class="footer-logo">
                         <div class="footer-logo-icon"><i class="fas fa-heartbeat"></i></div>
-                        RSD KALISAT Rekrutment
+                       Rekrutment
                     </a>
                     <p class="footer-about">Platform rekrutmen resmi tenaga kesehatan profesional Indonesia. Kami
                         berkomitmen menghadirkan proses seleksi yang adil, transparan, dan bermartabat.</p>

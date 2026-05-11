@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Hasil Pendaftaran – RSD Kalisat</title>
-    <link rel="icon" href="{{ asset('logo.png') }}" type="image/x-icon">
+    <title>Hasil Pendaftaran – SIREKRUT</title>
+    <link rel="icon" href="{{ asset('Lambang-kabupaten-jember.png') }}" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap"
@@ -780,7 +780,7 @@
             <div class="card-header">
                 <div class="hospital-badge">
                     <div class="badge-dot"></div>
-                    RSD Kalisat — Rekrutmen Pegawai
+                   Rekrutmen Pegawai
                 </div>
                 <div class="trophy-ring">🎉</div>
                 <h1>Pendaftaran Berhasil!</h1>

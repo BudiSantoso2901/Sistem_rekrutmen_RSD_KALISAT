@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login — SIREKRUT RSD Kalisat</title>
+    <title>Login — SIREKRUT</title>
+    <link rel="icon" href="{{ asset('Lambang-kabupaten-jember.png') }}" type="image/x-icon">
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital@0;1&display=swap"
         rel="stylesheet">
@@ -410,9 +411,9 @@
 
         {{-- brand --}}
         <div class="brand">
-            <img src="{{ asset('logo.png') }}" alt="Logo RSD Kalisat">
+            <img src="{{ asset('Lambang-kabupaten-jember.png') }}" alt="Logo RSD Kalisat">
             <div class="brand-text">
-                <div class="brand-name">RSD Kalisat</div>
+                <div class="brand-name"></div>
                 <div class="brand-sub">Sistem Rekrutmen Pegawai</div>
             </div>
         </div>
@@ -479,8 +480,8 @@
         </form>
 
         <div class="footer-note">
-            &copy; {{ date('Y') }} <strong>RSD Kalisat</strong> &mdash; Kabupaten Jember<br>
-            Hak akses dikelola oleh Tim IT
+            &copy; {{ date('Y') }} <strong></strong> &mdash; Kabupaten Jember<br>
+            Hak akses dikelola oleh Tim IT RSD Kalisat.
         </div>
     </div>
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="{{ asset('logo.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('Lambang-kabupaten-jember.png') }}" type="image/x-icon">
     <title>@yield('title', 'SIREKRUT') — RSD Kalisat</title>
 
     {{-- Fonts --}}
@@ -399,9 +399,9 @@
     {{-- SIDEBAR --}}
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-brand">
-            <img src="{{ asset('logo.png') }}" alt="Logo RSD Kalisat">
+            <img src="{{ asset('Lambang-kabupaten-jember.png') }}" alt="sistem rekrutmen ">
             <div class="sidebar-brand-text">
-                <div class="sidebar-brand-name">RSD Kalisat</div>
+                <div class="sidebar-brand-name">Sistem Rekrutmen Pegawai</div>
                 <div class="sidebar-brand-sub">SIREKRUT</div>
             </div>
         </div>
