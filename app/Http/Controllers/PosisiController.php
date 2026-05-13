@@ -12,37 +12,43 @@ class PosisiController extends Controller
     // 🔥 READ (list + single)
     public function index(Request $request)
     {
+        $user = auth()->user();
+
         if ($request->ajax()) {
 
-            $data = Posisi::with('rumahSakit')
-                ->latest()
-                ->get()
-                ->map(function ($item) {
+            $query = Posisi::with('rumahSakit');
 
-                    return [
-                        'id' => $item->id,
+            // tampilkan posisi sesuai RS user login
+            $query->where('id_rs', $user->rumah_sakit_id);
 
-                        'nama_posisi' => $item->nama_posisi,
+            $data = $query->latest()->get()->map(function ($item) {
 
-                        'kode_pelamar' => $item->kode_pelamar,
+                return [
+                    'id' => $item->id,
 
-                        'deskripsi_posisi' => $item->deskripsi_posisi,
+                    'nama_posisi' => $item->nama_posisi,
 
-                        'tanggal_ditutup' => $item->tanggal_ditutup,
+                    'kode_pelamar' => $item->kode_pelamar,
 
-                        'id_rs' => $item->id_rs,
+                    'deskripsi_posisi' => $item->deskripsi_posisi,
 
-                        'nama_rs' => $item->rumahSakit->nama_rs ?? '-',
+                    'tanggal_ditutup' => $item->tanggal_ditutup,
 
-                        'created_at' => $item->created_at->format('Y-m-d H:i:s'),
-                    ];
-                });
+                    'id_rs' => $item->id_rs,
+
+                    'nama_rs' => $item->rumahSakit->nama_rs ?? '-',
+
+                    'created_at' => $item->created_at->format('Y-m-d H:i:s'),
+                ];
+            });
 
             return response()->json($data);
         }
 
         return view('IT.Posisi', [
-            'rumahSakits' => RumahSakit::orderBy('nama_rs')->get()
+            'rumahSakits' => RumahSakit::where('id', $user->rumah_sakit_id)
+                ->orderBy('nama_rs')
+                ->get()
         ]);
     }
 
@@ -51,20 +57,14 @@ class PosisiController extends Controller
     {
         $request->validate(
             [
-                'id_rs' => 'required|exists:rumah_sakits,id',
                 'nama_posisi' => 'required|string|max:255',
                 'deskripsi_posisi' => 'nullable|string',
                 'tanggal_ditutup' => 'nullable|date',
-                'kode_pelamar' => [
-                    'required',
-                    'string',
-                    'max:255',
-                ],
+                'kode_pelamar' => 'required|string|max:255',
             ],
             [
                 'nama_posisi.required' => 'Nama posisi wajib diisi.',
                 'kode_pelamar.required' => 'Kode pelamar wajib diisi.',
-                'kode_pelamar.unique' => 'Kode pelamar sudah digunakan. Harap gunakan kode lain.',
             ]
         );
 
@@ -75,13 +75,18 @@ class PosisiController extends Controller
                 'deskripsi_posisi' => $request->deskripsi_posisi,
                 'tanggal_ditutup' => $request->tanggal_ditutup,
                 'kode_pelamar' => $request->kode_pelamar,
-                'id_rs' => $request->id_rs,
+
+                // otomatis sesuai RS user login
+                'id_rs' => auth()->user()->rumah_sakit_id,
             ]
         );
 
         return response()->json([
             'success' => true,
-            'message' => $request->id ? 'Berhasil update posisi' : 'Berhasil tambah posisi',
+            'message' => $request->id
+                ? 'Berhasil update posisi'
+                : 'Berhasil tambah posisi',
+
             'data' => $posisi
         ]);
     }

@@ -25,4 +25,8 @@ class RumahSakit extends Model
     {
         return $this->hasMany(Posisi::class, 'id_rs');
     }
+    public function users()
+    {
+        return $this->hasMany(User::class, 'rumah_sakit_id');
+    }
 }

@@ -517,7 +517,14 @@ class PelamarController extends Controller
     }
     public function tampil_halaman_validasi()
     {
-        $pelamars = Pelamar::with(['posisi', 'files'])
+        $user = auth()->user();
+
+        $pelamars = Pelamar::with([
+            'posisi',
+            'files',
+            'rumahSakit'
+        ])
+            ->where('rumah_sakit_id', $user->rumah_sakit_id)
             ->latest()
             ->get();
 
@@ -599,7 +606,7 @@ class PelamarController extends Controller
     }
     public function detail_pelamar(string $token)
     {
-        $pelamar = Pelamar::with(['posisi', 'files'])
+        $pelamar = Pelamar::with(['posisi', 'files', 'rumahSakit'])
             ->where('token', $token)
             ->firstOrFail();
 
@@ -635,6 +642,9 @@ class PelamarController extends Controller
                 // Waktu
                 'created_at'              => $pelamar->created_at?->format('d M Y, H:i'),
                 'updated_at'              => $pelamar->updated_at?->format('d M Y, H:i'),
+
+                // Rumah Sakit
+                'nama_rs'                => $pelamar->rumahSakit?->nama_rs,
 
                 // Berkas (files)
                 'files' => $pelamar->files->map(fn($f) => [

@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'role',
         'password',
+        'rumah_sakit_id',
     ];
 
     /**
@@ -51,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->role === $role;
     }
+    public function rumahSakit()
+    {
+        return $this->belongsTo(RumahSakit::class, 'rumah_sakit_id');
+    }
+
 }

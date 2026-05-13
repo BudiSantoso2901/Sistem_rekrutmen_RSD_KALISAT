@@ -1560,58 +1560,78 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($pelamars as $i => $p)
+                @foreach ($pelamars as $i => $p)
                     @php
                         $initials = strtoupper(
                             substr($p->nama ?? 'P', 0, 1) . substr(explode(' ', $p->nama ?? 'P ')[1] ?? '', 0, 1),
                         );
+
                         $canValidate = $p->status_pelamar === 'pending';
                     @endphp
+
                     <tr data-status="{{ $p->status_pelamar }}">
-                        <td style="color:var(--muted);font-size:.75rem">{{ $i + 1 }}</td>
+                        <td style="color:var(--muted);font-size:.75rem">
+                            {{ $i + 1 }}
+                        </td>
+
                         <td>
                             <div class="td-name">
                                 <div class="avatar-circle">{{ $initials }}</div>
+
                                 <div>
                                     <div class="td-name-primary">{{ $p->nama }}</div>
                                     <div class="td-name-secondary">{{ $p->email }}</div>
                                 </div>
                             </div>
                         </td>
-                        <td style="font-size:.82rem;color:var(--ink2)">{{ $p->posisi->nama_posisi ?? '-' }}</td>
+
+                        <td style="font-size:.82rem;color:var(--ink2)">
+                            {{ $p->posisi->nama_posisi ?? '-' }}
+                        </td>
+
                         <td style="font-size:.75rem;color:var(--muted)">
                             {{ $p->created_at->format('d M Y') }}<br>
-                            <span style="font-size:.7rem">{{ $p->created_at->diffForHumans() }}</span>
+
+                            <span style="font-size:.7rem">
+                                {{ $p->created_at->diffForHumans() }}
+                            </span>
                         </td>
+
                         <td>
                             <span class="badge {{ $p->status_pelamar }}">
                                 <span class="badge-dot"></span>
+
                                 {{ str_replace('_', ' ', ucwords($p->status_pelamar, '_')) }}
                             </span>
                         </td>
+
                         <td>
                             <div style="display:flex;gap:6px;flex-wrap:wrap">
+
                                 @if ($canValidate)
                                     <button class="btn-action btn-validasi"
                                         onclick="openValidasi('{{ $p->token }}','{{ addslashes($p->nama) }}','{{ $p->posisi->nama_posisi ?? '-' }}','{{ $p->status_pelamar }}')">
-                                        <i class="fa-solid fa-stamp"></i> Validasi
+
+                                        <i class="fa-solid fa-stamp"></i>
+                                        Validasi
                                     </button>
                                 @else
-                                    <span class="btn-action btn-final"><i class="fa-solid fa-lock"></i> Final</span>
+                                    <span class="btn-action btn-final">
+                                        <i class="fa-solid fa-lock"></i>
+                                        Final
+                                    </span>
                                 @endif
-                                <button class="btn-action btn-detail" onclick="openDetail('{{ $p->token }}')"
-                                    title="Detail Pelamar">
-                                    <i class="fa-solid fa-eye"></i> Detail
+
+                                <button class="btn-action btn-detail" onclick="openDetail('{{ $p->token }}')">
+
+                                    <i class="fa-solid fa-eye"></i>
+                                    Detail
                                 </button>
+
                             </div>
                         </td>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="6" style="text-align:center;padding:40px;color:var(--muted)">Belum ada data pelamar
-                        </td>
-                    </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -1646,8 +1666,7 @@
                 <label class="form-label-sm">Tentukan Keputusan</label>
                 <div class="status-options">
                     <div>
-                        <input type="radio" class="status-option" name="next_status" id="so_diterima"
-                            value="diterima">
+                        <input type="radio" class="status-option" name="next_status" id="so_diterima" value="diterima">
                         <label for="so_diterima" class="status-label sl-diterima">
                             <div class="sl-icon"><i class="fa-solid fa-user-check"></i></div> Diterima
                         </label>
@@ -1745,7 +1764,9 @@
         $(document).ready(function() {
             dtTable = $('#pelamarTable').DataTable({
                 responsive: true,
+                autoWidth: false,
                 language: {
+                    emptyTable: "Belum ada data pelamar",
                     search: 'Cari:',
                     lengthMenu: 'Tampilkan _MENU_ data',
                     info: 'Menampilkan _START_–_END_ dari _TOTAL_ pelamar',
@@ -1905,6 +1926,7 @@
             ${ii('No. HP',p.no_hp)} ${ii('Email',p.email)}
             ${ii('Jenis Kelamin',p.jenis_kelamin)} ${ii('Kota Domisili',p.kota_domisili)}
             ${ii('Jenjang',p.jenjang)} ${ii('Jenis Pelamar',p.jenis_pelamar)}
+            ${ii('Rumah Sakit Yang Dipilih',p.nama_rs)}
             ${ii('No. STR',p.no_str)} ${ii('Alamat',p.alamat,true)}
         </div>
         <div class="ds-title" style="margin-top:18px"><i class="fa-solid fa-briefcase"></i> Pengalaman</div>
@@ -1912,7 +1934,7 @@
             ${ii('Pengalaman',p.pengalaman_kerja)} ${ii('Keterangan',p.keterangan_pengalaman,true)}
         </div>
         ${p.catatan ? `<div class="ds-title" style="margin-top:18px"><i class="fa-solid fa-note-sticky"></i> Catatan Admin</div>
-            <div class="info-grid">${ii('Catatan',p.catatan,true)}</div>` : ''}
+                    <div class="info-grid">${ii('Catatan',p.catatan,true)}</div>` : ''}
         <div class="ds-title" style="margin-top:18px"><i class="fa-solid fa-clock"></i> Waktu</div>
         <div class="info-grid">${ii('Terdaftar',p.created_at)} ${ii('Diperbarui',p.updated_at)}</div>`;
 
@@ -2300,22 +2322,22 @@
     function ii(label, val, full = false) {
         const empty = !val || val === 'null' || val === '-' || String(val).trim() === '';
         return `<div class="info-item${full?' full':''}">
-            <div class="info-key">${label}</div>
-            <div class="info-val${empty?' empty':''}">${empty ? '—' : esc(String(val))}</div>
-        </div>`;
+                    <div class="info-key">${label}</div>
+                    <div class="info-val${empty?' empty':''}">${empty ? '—' : esc(String(val))}</div>
+                </div>`;
     }
 
     function skelHtml() {
         return `<div style="padding:4px 0">
-            <div class="skeleton sk-line sk-med"></div>
-            <div class="skeleton sk-line sk-short"></div>
-            <div class="skeleton sk-line sk-full"></div>
-        </div>`;
+                    <div class="skeleton sk-line sk-med"></div>
+                    <div class="skeleton sk-line sk-short"></div>
+                    <div class="skeleton sk-line sk-full"></div>
+                </div>`;
     }
 
     function errHtml(msg) {
         return `<p style="text-align:center;padding:30px;color:var(--red)">
-            <i class="fa-solid fa-circle-exclamation"></i> ${msg}</p>`;
+                    <i class="fa-solid fa-circle-exclamation"></i> ${msg}</p>`;
         }
 
         function esc(s) {
