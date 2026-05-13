@@ -1979,7 +1979,7 @@
                         <div class="hero-stat-label">Posisi Terbuka</div>
                     </div>
                     <div class="hero-stat-divider"></div> --}}
-                    <div class="hero-stat">
+                    {{-- <div class="hero-stat">
                         <div class="hero-stat-num counting" data-target="112">0</div>
                         <div class="hero-stat-label">TT</div>
                     </div>
@@ -1987,7 +1987,7 @@
                     <div class="hero-stat">
                         <div class="hero-stat-num counting" data-target="357">0</div>
                         <div class="hero-stat-label">Pegawai Aktif</div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
@@ -2165,22 +2165,22 @@
                 <div class="process-step reveal">
                     <div class="step-num">1</div>
                     <div class="step-title">Kirim Lamaran</div>
-                    <div class="step-desc">11 s/d 13 Mei 2026</div>
+                    {{-- <div class="step-desc">11 s/d 13 Mei 2026</div> --}}
                 </div>
                 <div class="process-step reveal">
                     <div class="step-num">2</div>
                     <div class="step-title">Seleksi Administrasi</div>
-                    <div class="step-desc">18 s/d 20 Mei 2026</div>
+                    {{-- <div class="step-desc">18 s/d 20 Mei 2026</div> --}}
                 </div>
                 <div class="process-step reveal">
                     <div class="step-num">3</div>
                     <div class="step-title">Wawancara & Test</div>
-                    <div class="step-desc">23 Mei 2026</div>
+                    {{-- <div class="step-desc">23 Mei 2026</div> --}}
                 </div>
                 <div class="process-step reveal">
                     <div class="step-num">4</div>
                     <div class="step-title">Hasil Pengumuman</div>
-                    <div class="step-desc">22 Juni 2026</div>
+                    {{-- <div class="step-desc">22 Juni 2026</div> --}}
                 </div>
             </div>
         </div>
