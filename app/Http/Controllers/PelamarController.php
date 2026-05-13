@@ -106,9 +106,9 @@ class PelamarController extends Controller
         $prefix =
             $kodeRs . '.' .
             $kodeJenis . '.' .
-            $kodePendidikan . '.' .
-            $kodePosisi . '.' .
-            $tahun;
+            // $kodePendidikan . '.' .
+            $kodePosisi ;
+            // $tahun;
 
         // =========================
         // NOMOR TERAKHIR
