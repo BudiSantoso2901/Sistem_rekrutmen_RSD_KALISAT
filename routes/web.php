@@ -36,7 +36,7 @@ Route::get('/file/view/{id}', [PelamarController::class, 'viewFile'])
 Route::middleware(['auth'])->group(function () {
     // IT
     Route::middleware('role:IT')->group(function () {
-
+        Route::get('/export/data-pelamar', [PelamarController::class, 'exportExcel'])->name('pelamar.export');
         Route::get('/dashboard/IT', [PelamarController::class, 'dash_it'])->name('dashboard');
         Route::get('/list/pelamar', [PelamarController::class, 'tampil_halaman_validasi'])
             ->name('sdm.pelamar');
@@ -75,6 +75,8 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/store',    [KuisController::class, 'soalStore'])->name('store');
             Route::delete('/{soalId}', [KuisController::class, 'soalDestroy'])->name('destroy');
         });
+        Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+        Route::post('/profile/update', [AuthController::class, 'updatePassword'])->name('profile.update');
     });
 
     // SDM
@@ -91,6 +93,6 @@ Route::middleware(['auth:pelamar'])->group(function () {
         ->name('file.upload');
 
     // Hapus file berdasarkan jenis
-    Route::delete('/file/{jenis}', [PelamarController::class, 'deleteFile'])
+    Route::delete('pelamar/file/{jenis}', [PelamarController::class, 'deleteFile'])
         ->name('file.delete');
 });
