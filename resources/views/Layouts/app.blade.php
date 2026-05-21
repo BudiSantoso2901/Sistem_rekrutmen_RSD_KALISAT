@@ -28,23 +28,84 @@
         }
 
         :root {
-            --teal: #0d7a6e;
-            --teal-dk: #085e54;
-            --teal-lt: #e6f4f2;
-            --teal-mid: #b2dcd7;
-            --gold: #c9922a;
-            --gold-lt: #fdf3e3;
-            --ink: #162130;
-            --ink2: #2e3d4f;
-            --muted: #6b7e93;
-            --line: #dce4ed;
-            --bg: #f0f4f8;
+
+            /* PRIMARY GREEN SYSTEM */
+
+            --g900: #052e1c;
+            --g800: #0d4f35;
+            --g700: #116040;
+            --g600: #1a7a52;
+            --g500: #22a06b;
+            --g400: #2ecc7a;
+            --g300: #5de8a0;
+            --g100: #e0f7ec;
+            --g50: #f0faf5;
+
+            /* MAIN COLORS */
+
+            --teal: var(--g500);
+            --teal-dk: var(--g800);
+            --teal-lt: var(--g50);
+            --teal-mid: var(--g100);
+
+            /* GOLD / ACCENT */
+
+            --gold: #d97706;
+            --gold-lt: #fffbeb;
+
+            /* TEXT */
+
+            --ink: #0a3324;
+            --ink2: #2e6b4f;
+            --muted: #5a9478;
+
+            /* SURFACE */
+
+            --bg: #f7fbf9;
             --white: #ffffff;
+
+            --surface: #ffffff;
+            --surface2: #f7fbf9;
+
+            /* BORDER */
+
+            --line: #d0ede0;
+            --border: #d0ede0;
+
+            /* STATUS */
+
+            --red: #e53e3e;
+            --green: #1a7a52;
+            --amber: #d97706;
+
+            --red-bg: #fff5f5;
+            --amber-bg: #fffbeb;
+
+            /* LAYOUT */
+
             --sidebar-w: 260px;
             --topbar-h: 64px;
-            --red: #c0392b;
-            --green: #1a7f5a;
-            --amber: #b45309;
+
+            /* RADIUS */
+
+            --radius-lg: 18px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --radius-xs: 5px;
+
+            /* SHADOW */
+
+            --shadow-card:
+                0 4px 24px rgba(13, 79, 53, .10),
+                0 1px 4px rgba(13, 79, 53, .06);
+
+            --shadow-btn:
+                0 4px 16px rgba(34, 160, 107, .30);
+
+            /* TRANSITION */
+
+            --transition:
+                all .22s cubic-bezier(.4, 0, .2, 1);
         }
 
         html,
@@ -408,7 +469,8 @@
 
         <nav>
             <div class="sidebar-section">Utama</div>
-            <a href="{{ route('dashboard') }}" class="sidebar-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+            <a href="{{ route('dashboard') }}"
+                class="sidebar-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                 <i class="fa-solid fa-gauge-high"></i> Dashboard
             </a>
 
@@ -427,7 +489,7 @@
                 <i class="fa-solid fa-briefcase"></i> Posisi Lowongan
             </a>
             <a href="{{ route('sdm.kuis.index') }}"
-            class="sidebar-link {{ request()->routeIs('sdm.kuis.index') ? 'active' : '' }} ">
+                class="sidebar-link {{ request()->routeIs('sdm.kuis.index') ? 'active' : '' }} ">
                 <i class="fa-solid fa-question-circle"></i> Kuis Rekrutmen
             </a>
             <a href="{{ route('hasil-kuis.index') }}"
@@ -436,7 +498,8 @@
             </a>
 
             <div class="sidebar-section">Profile</div>
-            <a href="" class="sidebar-link ">
+            <a href="{{ route('profile') }}"
+                class="sidebar-link {{ request()->routeIs('profile') ? 'active' : '' }} ">
                 <i class="fa-solid fa-chart-bar"></i> Profile
             </a>
         </nav>
