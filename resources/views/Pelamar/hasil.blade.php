@@ -7,29 +7,33 @@
     <link rel="icon" href="{{ asset('Lambang-kabupaten-jember.png') }}" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
+        /* ── CSS VARIABLES ── */
         :root {
-            --primary: #0d6e4e;
-            --primary-light: #14a372;
-            --primary-pale: #e4f7f0;
-            --accent: #f4a827;
-            --accent-light: #fde9b8;
-            --danger: #e85d5d;
-            --text-dark: #1a2e25;
-            --text-mid: #3d5246;
-            --text-muted: #7a9488;
-            --bg: #f5faf7;
-            --white: #ffffff;
-            --border: #c8e6d8;
-            --shadow: 0 4px 24px rgba(13, 110, 78, 0.10);
-            --shadow-lg: 0 12px 48px rgba(13, 110, 78, 0.16);
+            --navy: #0d4f35;
+            --navy-mid: #116040;
+            --navy-lite: #1a7a52;
+            --gold: #2ecc7a;
+            --gold-light: #5de8a0;
+            --cream: #f0faf5;
+            --white: #FFFFFF;
+            --text-dark: #0a3324;
+            --text-mid: #2e6b4f;
+            --text-soft: #5a9478;
+            --success: #1B8A5A;
+            --success-bg: #E8F7F1;
+            --shadow-sm: 0 2px 8px rgba(13, 79, 53, .10);
+            --shadow-md: 0 8px 32px rgba(13, 79, 53, .16);
+            --shadow-lg: 0 24px 64px rgba(13, 79, 53, .22);
             --radius: 16px;
-            --radius-sm: 8px;
-            --radius-xl: 32px;
+            --radius-sm: 10px;
+            --radius-xs: 6px;
         }
 
+        /* ── RESET & BASE ── */
         *,
         *::before,
         *::after {
@@ -39,169 +43,136 @@
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: var(--bg);
-            min-height: 100vh;
-            padding: 32px 16px 48px;
-            position: relative;
-            overflow-x: hidden;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
             color: var(--text-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* ─── BACKGROUND ANIMATION ─── */
+        /* ── ANIMATED BACKGROUND ── */
         .bg-canvas {
             position: fixed;
             inset: 0;
             z-index: 0;
             overflow: hidden;
-            pointer-events: none;
+            background: linear-gradient(145deg, #e0f5ec 0%, #f0faf5 50%, #e8f7ee 100%);
+        }
+
+        .bg-canvas::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(13, 79, 53, .10) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(46, 204, 122, .08) 0%, transparent 50%),
+                radial-gradient(circle at 60% 10%, rgba(10, 51, 36, .06) 0%, transparent 40%);
         }
 
         .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.22;
-            animation: float-orb linear infinite;
+            filter: blur(60px);
+            animation: driftOrb 20s ease-in-out infinite alternate;
         }
 
         .orb-1 {
-            width: 520px;
-            height: 520px;
-            background: radial-gradient(circle, #14a372 0%, #0d6e4e 100%);
-            top: -180px;
-            left: -140px;
-            animation-duration: 22s;
-            animation-delay: 0s;
+            width: 500px;
+            height: 500px;
+            background: rgba(13, 79, 53, .14);
+            top: -100px;
+            left: -100px;
+            animation-duration: 18s;
         }
 
         .orb-2 {
-            width: 380px;
-            height: 380px;
-            background: radial-gradient(circle, #f4a827 0%, #e8850d 100%);
-            top: 30%;
-            right: -120px;
-            animation-duration: 28s;
-            animation-delay: -8s;
+            width: 400px;
+            height: 400px;
+            background: rgba(46, 204, 122, .10);
+            bottom: -80px;
+            right: -80px;
+            animation-duration: 22s;
+            animation-delay: -6s;
         }
 
         .orb-3 {
             width: 300px;
             height: 300px;
-            background: radial-gradient(circle, #3ecf97 0%, #0d6e4e 100%);
-            bottom: -80px;
-            left: 20%;
-            animation-duration: 18s;
-            animation-delay: -4s;
+            background: rgba(10, 51, 36, .08);
+            top: 40%;
+            left: 60%;
+            animation-duration: 25s;
+            animation-delay: -12s;
         }
 
-        @keyframes float-orb {
-            0% {
+        @keyframes driftOrb {
+            from {
                 transform: translate(0, 0) scale(1);
             }
 
-            25% {
-                transform: translate(30px, -40px) scale(1.05);
-            }
-
-            50% {
-                transform: translate(-20px, 30px) scale(0.95);
-            }
-
-            75% {
-                transform: translate(40px, 20px) scale(1.03);
-            }
-
-            100% {
-                transform: translate(0, 0) scale(1);
+            to {
+                transform: translate(40px, 30px) scale(1.1);
             }
         }
 
-        /* Grid lines overlay */
         .grid-overlay {
             position: fixed;
             inset: 0;
             z-index: 0;
             background-image:
-                linear-gradient(rgba(13, 110, 78, 0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(13, 110, 78, 0.04) 1px, transparent 1px);
-            background-size: 48px 48px;
-            pointer-events: none;
+                linear-gradient(rgba(13, 79, 53, .04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(13, 79, 53, .04) 1px, transparent 1px);
+            background-size: 40px 40px;
         }
 
-        /* Floating medical cross icons */
-        .float-icon {
-            position: fixed;
-            font-size: 18px;
-            opacity: 0.07;
-            color: var(--primary);
-            animation: drift linear infinite;
-            pointer-events: none;
-            z-index: 0;
-            user-select: none;
-        }
-
-        @keyframes drift {
-            0% {
-                transform: translateY(0px) rotate(0deg);
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 0.07;
-            }
-
-            90% {
-                opacity: 0.07;
-            }
-
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* ─── LAYOUT ─── */
+        /* ── WRAPPER ── */
         .wrapper {
             position: relative;
             z-index: 1;
-            max-width: 860px;
-            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px 16px 64px;
         }
 
-        /* ─── ALERT ─── */
+        /* ── ALERT ── */
         .alert-success {
             display: flex;
             align-items: center;
             gap: 12px;
-            background: var(--white);
-            border: 1.5px solid var(--primary-light);
-            color: var(--primary);
+            background: var(--success-bg);
+            border: 1.5px solid rgba(27, 138, 90, .3);
+            border-left: 4px solid var(--success);
+            border-radius: var(--radius-sm);
             padding: 14px 20px;
-            border-radius: var(--radius);
-            margin-bottom: 28px;
-            font-size: 14px;
+            margin-bottom: 24px;
+            width: 100%;
+            max-width: 780px;
+            font-size: .92rem;
             font-weight: 500;
-            box-shadow: var(--shadow);
-            animation: slide-down 0.5s cubic-bezier(.22, .68, 0, 1.2) both;
+            color: var(--success);
+            animation: slideDown .5s ease;
         }
 
         .alert-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--primary-pale);
+            width: 28px;
+            height: 28px;
+            background: var(--success);
+            color: #fff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: .85rem;
+            font-weight: 700;
             flex-shrink: 0;
         }
 
-        @keyframes slide-down {
+        @keyframes slideDown {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(-12px);
             }
 
             to {
@@ -210,19 +181,21 @@
             }
         }
 
-        /* ─── CARD ─── */
+        /* ── MAIN CARD ── */
         .card-main {
+            width: 100%;
+            max-width: 780px;
             background: var(--white);
-            border-radius: var(--radius-xl);
+            border-radius: 24px;
             box-shadow: var(--shadow-lg);
             overflow: hidden;
-            animation: rise-up 0.7s cubic-bezier(.22, .68, 0, 1.2) 0.1s both;
+            animation: riseUp .6s cubic-bezier(.22, 1, .36, 1) both;
         }
 
-        @keyframes rise-up {
+        @keyframes riseUp {
             from {
                 opacity: 0;
-                transform: translateY(40px);
+                transform: translateY(32px);
             }
 
             to {
@@ -231,203 +204,165 @@
             }
         }
 
-        /* ─── HERO HEADER ─── */
+        /* ── CARD HEADER ── */
         .card-header {
-            background: linear-gradient(135deg, var(--primary) 0%, #0a5a3f 60%, #1c7a58 100%);
-            padding: 40px 32px 36px;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, var(--navy-lite) 100%);
+            padding: 40px 40px 0;
+            text-align: center;
             position: relative;
             overflow: hidden;
-            text-align: center;
         }
 
         .card-header::before {
             content: '';
             position: absolute;
-            width: 320px;
-            height: 320px;
+            top: -60px;
+            right: -60px;
+            width: 240px;
+            height: 240px;
+            background: rgba(212, 160, 23, .10);
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.06);
-            top: -120px;
-            right: -80px;
         }
 
         .card-header::after {
             content: '';
             position: absolute;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.04);
-            bottom: -80px;
+            bottom: 30px;
             left: -40px;
-        }
-
-        /* ECG decorative line */
-        .ecg-line {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 36px;
-            opacity: 0.18;
+            width: 160px;
+            height: 160px;
+            background: rgba(255, 255, 255, .04);
+            border-radius: 50%;
         }
 
         .hospital-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, .12);
+            border: 1px solid rgba(255, 255, 255, .2);
             border-radius: 100px;
             padding: 6px 16px;
-            margin-bottom: 20px;
-            color: #c7f0df;
-            font-size: 12px;
+            font-size: .78rem;
             font-weight: 600;
-            letter-spacing: 0.06em;
+            letter-spacing: .06em;
             text-transform: uppercase;
+            color: rgba(255, 255, 255, .85);
+            margin-bottom: 20px;
         }
 
         .badge-dot {
-            width: 6px;
-            height: 6px;
-            background: var(--accent);
+            width: 7px;
+            height: 7px;
+            background: var(--gold-light);
             border-radius: 50%;
-            animation: pulse-dot 1.8s ease-in-out infinite;
+            animation: pulse 2s infinite;
         }
 
-        @keyframes pulse-dot {
+        @keyframes pulse {
 
             0%,
             100% {
-                transform: scale(1);
                 opacity: 1;
+                transform: scale(1);
             }
 
             50% {
-                transform: scale(1.6);
-                opacity: 0.6;
+                opacity: .6;
+                transform: scale(1.3);
             }
         }
 
         .trophy-ring {
-            width: 72px;
-            height: 72px;
-            background: rgba(255, 255, 255, 0.12);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 16px;
-            font-size: 32px;
-            animation: pop-in 0.6s cubic-bezier(.22, .68, 0, 1.2) 0.4s both;
+            font-size: 3.2rem;
+            margin-bottom: 12px;
+            display: block;
+            animation: bounceIn .8s cubic-bezier(.22, 1, .36, 1) .3s both;
         }
 
-        @keyframes pop-in {
-            from {
+        @keyframes bounceIn {
+            0% {
                 opacity: 0;
-                transform: scale(0.3);
+                transform: scale(.4);
             }
 
-            to {
+            70% {
+                transform: scale(1.1);
+            }
+
+            100% {
                 opacity: 1;
                 transform: scale(1);
             }
         }
 
         .card-header h1 {
-            font-family: 'Fraunces', serif;
-            color: #fff;
-            font-size: clamp(22px, 4vw, 30px);
-            font-weight: 600;
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            color: var(--white);
             margin-bottom: 8px;
-            position: relative;
+            line-height: 1.2;
         }
 
         .card-header p {
-            color: #a8d8c4;
-            font-size: 14px;
-            position: relative;
+            font-size: .95rem;
+            color: rgba(255, 255, 255, .7);
+            margin-bottom: 28px;
         }
 
-        /* ─── CARD BODY ─── */
+        .ecg-line {
+            display: block;
+            width: 100%;
+            height: 36px;
+            margin: 0;
+            opacity: .35;
+        }
+
+        /* ── CARD BODY ── */
         .card-body {
-            padding: 32px;
+            padding: 36px 40px;
         }
 
-        /* ─── SECTION ─── */
+        /* ── SECTION ── */
         .section {
             margin-bottom: 28px;
-            animation: fade-in-up 0.5s ease both;
-        }
-
-        .section:nth-child(1) {
-            animation-delay: 0.2s;
-        }
-
-        .section:nth-child(2) {
-            animation-delay: 0.35s;
-        }
-
-        .section:nth-child(3) {
-            animation-delay: 0.5s;
-        }
-
-        @keyframes fade-in-up {
-            from {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .section-header {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .section-icon {
             width: 36px;
             height: 36px;
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius-xs);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            flex-shrink: 0;
+            font-size: 1.1rem;
         }
 
         .icon-green {
-            background: var(--primary-pale);
+            background: var(--success-bg);
         }
 
         .icon-blue {
-            background: #e0f0ff;
-        }
-
-        .icon-amber {
-            background: var(--accent-light);
+            background: #E8F7EF;
         }
 
         .section-title {
-            font-size: 13px;
+            font-size: 1rem;
             font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--text-muted);
+            color: var(--text-dark);
+            letter-spacing: .01em;
         }
 
-        /* ─── ACCOUNT BOX ─── */
+        /* ── ACCOUNT BOX ── */
         .account-box {
-            background: linear-gradient(135deg, var(--primary-pale) 0%, #d8f4e9 100%);
-            border: 1.5px solid var(--border);
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
             border-radius: var(--radius);
             padding: 24px;
             position: relative;
@@ -435,78 +370,66 @@
         }
 
         .account-box::before {
-            content: '⊕';
+            content: '';
             position: absolute;
-            right: 20px;
-            top: 16px;
-            font-size: 64px;
-            color: var(--primary);
-            opacity: 0.06;
-            line-height: 1;
+            top: -30px;
+            right: -30px;
+            width: 120px;
+            height: 120px;
+            background: rgba(212, 160, 23, .15);
+            border-radius: 50%;
         }
 
         .account-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 16px;
-        }
-
-        .account-field {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 12px 16px;
+            position: relative;
         }
 
         .account-field label {
             display: block;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: .08em;
             text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 4px;
+            color: rgba(255, 255, 255, .55);
+            margin-bottom: 6px;
         }
 
         .account-field .value {
-            font-size: 15px;
+            font-size: .95rem;
             font-weight: 600;
-            color: var(--primary);
+            color: var(--white);
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(255, 255, 255, .15);
+            border-radius: var(--radius-xs);
+            padding: 8px 12px;
+            letter-spacing: .02em;
             word-break: break-all;
         }
 
-        .nomor-peserta-field {
-            grid-column: 1 / -1;
-            background: var(--primary);
-            border-color: transparent;
-        }
-
-        .nomor-peserta-field label {
-            color: #7ec9a9;
-        }
-
         .nomor-peserta-field .value {
-            font-family: 'Fraunces', serif;
-            font-size: 22px;
-            color: var(--white);
-            letter-spacing: 0.04em;
+            color: var(--gold-light);
+            font-size: 1.05rem;
+            border-color: rgba(212, 160, 23, .4);
+            background: rgba(212, 160, 23, .12);
         }
 
-        /* ─── DATA TABLE ─── */
+        /* ── DATA BOX ── */
         .data-box {
-            background: var(--white);
-            border: 1.5px solid var(--border);
+            border: 1.5px solid #d0ede0;
             border-radius: var(--radius);
             overflow: hidden;
         }
 
         .data-row {
-            display: grid;
-            grid-template-columns: 160px 1fr;
+            display: flex;
             align-items: center;
             padding: 13px 20px;
-            border-bottom: 1px solid #eef5f0;
-            transition: background 0.15s;
+            border-bottom: 1px solid #e0f2ea;
+            gap: 16px;
+            transition: background .15s;
         }
 
         .data-row:last-child {
@@ -514,217 +437,720 @@
         }
 
         .data-row:hover {
-            background: var(--primary-pale);
+            background: #f0faf5;
         }
 
-        .data-row .key {
-            font-size: 13px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        .data-row .val {
-            font-size: 14px;
-            color: var(--text-dark);
+        .key {
+            font-size: .8rem;
             font-weight: 600;
+            color: var(--text-soft);
+            width: 140px;
+            flex-shrink: 0;
+            letter-spacing: .02em;
+        }
+
+        .val {
+            font-size: .9rem;
+            color: var(--text-dark);
+            font-weight: 500;
+            flex: 1;
         }
 
         .pill {
             display: inline-block;
-            background: var(--primary-pale);
-            color: var(--primary);
-            border: 1px solid var(--border);
+            background: linear-gradient(90deg, #e0f7ec 0%, #c8f0de 100%);
+            color: var(--navy-lite);
+            border: 1px solid #a8e0c4;
             border-radius: 100px;
-            padding: 3px 12px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        /* ─── FILE ITEMS ─── */
-        .files-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .file-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            background: var(--white);
-            border: 1.5px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 14px 16px;
-            transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
-        }
-
-        .file-item:hover {
-            box-shadow: var(--shadow);
-            transform: translateY(-2px);
-            border-color: var(--primary-light);
-        }
-
-        .file-type-badge {
-            background: var(--primary);
-            color: var(--white);
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.07em;
-            padding: 5px 10px;
-            border-radius: 6px;
-            text-transform: uppercase;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-
-        .file-name {
-            flex: 1;
-            font-size: 13px;
-            color: var(--text-mid);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .file-actions {
-            display: flex;
-            gap: 8px;
-            flex-shrink: 0;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 7px 14px;
-            border-radius: var(--radius-sm);
-            font-size: 12px;
+            padding: 3px 14px;
+            font-size: .82rem;
             font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: transform 0.15s, opacity 0.15s;
-            border: none;
         }
 
-        .btn:hover {
-            opacity: 0.85;
-            transform: scale(0.97);
-        }
-
-        .btn:active {
-            transform: scale(0.94);
-        }
-
-        .btn-view {
-            background: #e0f0ff;
-            color: #1a6bbf;
-        }
-
-        .btn-download {
-            background: var(--primary-pale);
-            color: var(--primary);
-        }
-
-        .empty-files {
-            text-align: center;
-            padding: 28px;
-            color: var(--text-muted);
-            font-size: 14px;
-            background: var(--bg);
-            border-radius: var(--radius-sm);
-        }
-
-        /* ─── FOOTER ACTIONS ─── */
+        /* ── CARD FOOTER ── */
         .card-footer {
-            background: #f8fbf9;
-            border-top: 1px solid var(--border);
-            padding: 24px 32px;
+            background: #f0faf5;
+            border-top: 1.5px solid #d0ede0;
+            padding: 24px 40px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
             flex-wrap: wrap;
             gap: 12px;
         }
 
         .footer-note {
-            font-size: 12px;
-            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: .82rem;
+            color: var(--text-mid);
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .btn-home,
+        .btn-print {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 100px;
+            font-size: .88rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all .2s;
+            cursor: pointer;
+            border: none;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .btn-home {
+            background: #ddf3ea;
+            color: var(--navy);
+        }
+
+        .btn-home:hover {
+            background: #c4ebd8;
+            transform: translateX(-2px);
+        }
+
+        .btn-home:last-of-type:hover {
+            transform: translateX(2px);
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: var(--navy);
+            box-shadow: 0 4px 16px rgba(212, 160, 23, .35);
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212, 160, 23, .45);
+        }
+
+        .btn-print:active {
+            transform: translateY(0);
+        }
+
+        .print-hint {
+            text-align: center;
+            font-size: .78rem;
+            color: var(--text-soft);
+            padding: 12px 40px 20px;
+        }
+
+        /* ═══════════════════════════════════════════════════
+           KARTU PESERTA FORMAL
+        ════════════════════════════════════════════════════ */
+        .kartu-section {
+            width: 100%;
+            max-width: 780px;
+            margin-top: 32px;
+            animation: riseUp .7s cubic-bezier(.22, 1, .36, 1) .2s both;
+        }
+
+        .kartu-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .kartu-section-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.25rem;
+            color: var(--navy);
+        }
+
+        /* ── Formal card container ── */
+        .kartu-wrapper {
+            width: 100%;
+        }
+
+        .kartu-formal {
+            background: var(--white);
+            border: 2px solid var(--navy);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        /* Header strip */
+        .kf-header {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kf-header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(255, 255, 255, .03) 10px,
+                    rgba(255, 255, 255, .03) 20px);
+        }
+
+        .kf-header-accent {
+            height: 6px;
+            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+        }
+
+        .kf-header-inner {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .kf-logo-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .15);
+            border: 2px solid rgba(255, 255, 255, .3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+
+        .kf-header-text {
+            flex: 1;
+        }
+
+        .kf-header-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.15rem;
+            color: var(--white);
+            line-height: 1.2;
+            letter-spacing: .01em;
+        }
+
+        .kf-header-sub {
+            font-size: .78rem;
+            color: rgba(255, 255, 255, .65);
+            margin-top: 3px;
+            letter-spacing: .03em;
+        }
+
+        .kf-header-badge {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .kf-badge-label {
+            display: block;
+            font-size: .62rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .5);
+            margin-bottom: 4px;
+        }
+
+        .kf-badge-nomor {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: var(--navy);
+            font-size: 20px;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 6px;
+            letter-spacing: .05em;
+        }
+
+        /* ── Subheader: Rumah Sakit ── */
+        .kf-rs-bar {
+            background: var(--success-bg);
+            border-bottom: 1px solid rgba(13, 79, 53, .15);
+            padding: 10px 28px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .kf-rs-icon {
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .kf-rs-info {
+            flex: 1;
+        }
+
+        .kf-rs-label {
+            font-size: .68rem;
+            font-weight: 600;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--text-soft);
+        }
+
+        .kf-rs-name {
+            font-size: .92rem;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .kf-rs-kode {
+            font-size: .75rem;
+            color: var(--text-soft);
+            background: rgba(13, 79, 53, .08);
+            border: 1px solid rgba(13, 79, 53, .15);
+            padding: 2px 10px;
+            border-radius: 100px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        /* ── Body: two-column layout ── */
+        .kf-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .kf-col {
+            padding: 22px 28px;
+        }
+
+        .kf-col:first-child {
+            border-right: 1.5px solid #e0ede8;
+        }
+
+        .kf-col-title {
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--navy);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid var(--gold);
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        .btn-home {
+        /* ── Info rows ── */
+        .kf-row {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 11px;
+        }
+
+        .kf-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .kf-label {
+            font-size: .67rem;
+            font-weight: 600;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            color: var(--text-soft);
+            margin-bottom: 2px;
+        }
+
+        .kf-value {
+            font-size: .88rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+
+        .kf-value.highlight {
+            color: var(--navy);
+            font-size: .95rem;
+        }
+
+        .kf-value .badge-posisi {
+            display: inline-block;
+            background: linear-gradient(90deg, #e0f7ec 0%, #c8f0de 100%);
+            color: var(--navy);
+            border: 1px solid rgba(13, 79, 53, .2);
+            border-radius: 5px;
+            padding: 3px 10px;
+            font-size: .82rem;
+            font-weight: 700;
+        }
+
+        .kf-value .badge-status {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: var(--primary);
-            color: var(--white);
-            padding: 11px 24px;
-            border-radius: 100px;
-            text-decoration: none;
-            font-size: 14px;
+            gap: 5px;
+            background: var(--success-bg);
+            color: var(--success);
+            border: 1px solid rgba(27, 138, 90, .25);
+            border-radius: 5px;
+            padding: 3px 10px;
+            font-size: .8rem;
             font-weight: 700;
-            box-shadow: 0 4px 16px rgba(13, 110, 78, 0.28);
-            transition: transform 0.18s, box-shadow 0.18s;
         }
 
-        .btn-home:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(13, 110, 78, 0.36);
+        .kf-value .badge-status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--success);
         }
 
-        /* ─── PRINT HINT ─── */
-        .print-hint {
+        /* ── Divider inside col ── */
+        .kf-divider {
+            height: 1px;
+            background: #e0ede8;
+            margin: 12px 0;
+        }
+
+        /* ── Footer strip ── */
+        .kf-footer {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+            padding: 14px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .kf-footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .kf-footer-label {
+            font-size: .62rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .45);
+        }
+
+        .kf-footer-val {
+            font-size: .8rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, .85);
+        }
+
+        .kf-footer-center {
+            flex: 1;
             text-align: center;
+        }
+
+        .kf-footer-watermark {
+            font-size: .68rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .25);
+            font-style: italic;
+        }
+
+        /* Barcode style */
+        .kf-barcode {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 3px;
+        }
+
+        .kf-barcode-bars {
+            display: flex;
+            gap: 2px;
+            height: 28px;
+            align-items: flex-end;
+        }
+
+        .kf-barcode-bars span {
+            width: 2.5px;
+            background: rgba(255, 255, 255, .4);
+            border-radius: 1px;
+        }
+
+        .kf-barcode-num {
+            font-size: .55rem;
+            color: rgba(255, 255, 255, .35);
+            letter-spacing: .05em;
+        }
+
+        /* ── PRINT BUTTON ROW ── */
+        .btn-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
             margin-top: 20px;
-            font-size: 12px;
-            color: var(--text-muted);
-            animation: fade-in-up 0.5s ease 0.8s both;
+            flex-wrap: wrap;
         }
 
-        /* ─── RESPONSIVE ─── */
-        @media (max-width: 600px) {
-            .card-body {
-                padding: 20px 16px;
+        /* ── MODAL / OVERLAY ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(11, 37, 69, .55);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+            animation: fadeIn .2s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
             }
 
-            .card-footer {
-                padding: 18px 16px;
-            }
-
-            .card-header {
-                padding: 28px 20px 24px;
-            }
-
-            .data-row {
-                grid-template-columns: 120px 1fr;
-            }
-
-            .file-item {
-                flex-wrap: wrap;
-            }
-
-            .file-name {
-                width: 100%;
+            to {
+                opacity: 1;
             }
         }
 
+        .modal-box {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 32px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: var(--shadow-lg);
+            animation: slideUp .3s cubic-bezier(.22, 1, .36, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-box h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--navy);
+        }
+
+        .modal-box p {
+            font-size: .88rem;
+            color: var(--text-mid);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-modal-cancel {
+            flex: 1;
+            padding: 11px;
+            border-radius: 100px;
+            border: 1.5px solid #d8e3f0;
+            background: transparent;
+            font-size: .88rem;
+            font-weight: 600;
+            color: var(--text-mid);
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: background .15s;
+        }
+
+        .btn-modal-cancel:hover {
+            background: #edf7f2;
+        }
+
+        .btn-modal-confirm {
+            flex: 2;
+            padding: 11px;
+            border-radius: 100px;
+            border: none;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            font-size: .88rem;
+            font-weight: 700;
+            color: var(--navy);
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            box-shadow: 0 4px 16px rgba(212, 160, 23, .35);
+            transition: all .2s;
+        }
+
+        .btn-modal-confirm:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(212, 160, 23, .45);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           PRINT STYLES
+        ════════════════════════════════════════════════════ */
         @media print {
-
-            .bg-canvas,
-            .grid-overlay,
-            .float-icon,
-            .btn-home {
-                display: none !important;
-            }
-
-            .card-main {
-                box-shadow: none;
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
 
             body {
-                background: white;
+                background: white !important;
+            }
+
+            .bg-canvas,
+            .grid-overlay,
+            .card-main,
+            .alert-success,
+            .kartu-section-header,
+            .btn-row,
+            .modal-overlay,
+            .print-hint {
+                display: none !important;
+            }
+
+            .wrapper {
+                padding: 0;
+                min-height: unset;
+            }
+
+            .kartu-section {
+                margin: 0;
+                max-width: 100%;
+                animation: none;
+            }
+
+            @page {
+                size: A4 portrait;
+                margin: 12mm 15mm;
+            }
+
+            .print-sheet {
+                display: block !important;
+            }
+
+            .kartu-formal {
+                border: 1.5px solid #0d4f35;
+                box-shadow: none;
+                border-radius: 8px;
+            }
+
+            .kf-header-title {
+                font-size: 13pt;
+            }
+
+            .kf-header-sub {
+                font-size: 8pt;
+            }
+
+            .kf-badge-nomor {
+                font-size: 20pt;
+            }
+
+            .kf-col-title {
+                font-size: 7pt;
+            }
+
+            .kf-label {
+                font-size: 7pt;
+            }
+
+            .kf-value {
+                font-size: 9.5pt;
+            }
+
+            .kf-rs-name {
+                font-size: 9.5pt;
+            }
+
+            .kf-footer-val {
+                font-size: 8pt;
+            }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 640px) {
+            .card-header {
+                padding: 28px 20px 0;
+            }
+
+            .card-body {
+                padding: 24px 20px;
+            }
+
+            .card-footer {
+                padding: 20px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .account-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .nomor-peserta-field {
+                grid-column: 1 / -1;
+            }
+
+            .key {
+                width: 110px;
+            }
+
+            .print-hint {
+                padding: 12px 20px 16px;
+            }
+
+            /* Formal card responsive */
+            .kf-header-inner {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .kf-header-badge {
+                width: 100%;
+                text-align: left;
+            }
+
+            .kf-body {
+                grid-template-columns: 1fr;
+            }
+
+            .kf-col:first-child {
+                border-right: none;
+                border-bottom: 1.5px solid #e0ede8;
+            }
+
+            .kf-col {
+                padding: 18px 20px;
+            }
+
+            .kf-footer {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .account-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kf-header-inner {
+                padding: 16px 16px;
             }
         }
     </style>
@@ -740,53 +1166,41 @@
     </div>
     <div class="grid-overlay"></div>
 
-    <!-- Floating medical symbols -->
-    <script>
-        const symbols = ['✚', '⊕', '♥', '✚', '⊕'];
-        const positions = [
-            [8, 10],
-            [20, 70],
-            [70, 20],
-            [85, 55],
-            [45, 85],
-            [60, 5],
-            [15, 45]
-        ];
-        positions.forEach(([left, top], i) => {
-            const el = document.createElement('div');
-            el.className = 'float-icon';
-            el.textContent = symbols[i % symbols.length];
-            el.style.left = left + '%';
-            el.style.top = (top + 100) + '%';
-            el.style.animationDuration = (14 + i * 3) + 's';
-            el.style.animationDelay = (i * 2) + 's';
-            document.querySelector('.bg-canvas').appendChild(el);
-        });
-    </script>
+    <!-- Print confirmation modal -->
+    <div class="modal-overlay" id="printModal">
+        <div class="modal-box">
+            <h3>🖨️ Cetak Kartu Pelamar</h3>
+            <p>Kartu peserta Anda akan dicetak dalam format landscape. Pastikan printer terhubung. Kartu berisi data
+                pendaftaran lengkap sebagai bukti resmi.</p>
+            <div class="modal-actions">
+                <button class="btn-modal-cancel" onclick="closeModal()">Batal</button>
+                <button class="btn-modal-confirm" onclick="doPrint()">✓ &nbsp;Cetak Sekarang</button>
+            </div>
+        </div>
+    </div>
 
     <div class="wrapper">
 
         {{-- ALERT --}}
         @if (session('success'))
-            <div class="alert-success">
+            <div class="alert-success animate__animated animate__fadeInDown">
                 <div class="alert-icon">✓</div>
                 <span>{{ session('success') }}</span>
             </div>
         @endif
 
-        <div class="card-main">
+        <!-- ───────────── MAIN RESULT CARD ───────────── -->
+        <div class="card-main animate__animated animate__fadeInUp">
 
-            <!-- ── HEADER ── -->
+            <!-- HEADER -->
             <div class="card-header">
                 <div class="hospital-badge">
                     <div class="badge-dot"></div>
-                   Rekrutmen Pegawai
+                    Rekrutmen Pegawai – SIREKRUT
                 </div>
-                <div class="trophy-ring">🎉</div>
+                <span class="trophy-ring">🎉</span>
                 <h1>Pendaftaran Berhasil!</h1>
                 <p>Data Anda telah tercatat. Simpan informasi akun di bawah ini.</p>
-
-                <!-- ECG decorative SVG -->
                 <svg class="ecg-line" viewBox="0 0 900 36" preserveAspectRatio="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <polyline fill="none" stroke="#ffffff" stroke-width="2"
@@ -794,10 +1208,10 @@
                 </svg>
             </div>
 
-            <!-- ── BODY ── -->
+            <!-- BODY -->
             <div class="card-body">
 
-                <!-- AKUN -->
+                <!-- Informasi Akun -->
                 <div class="section">
                     <div class="section-header">
                         <div class="section-icon icon-green">🔐</div>
@@ -807,7 +1221,7 @@
                         <div class="account-grid">
                             <div class="account-field nomor-peserta-field">
                                 <label>Nomor Peserta</label>
-                                <div class="value">{{ $nomor_peserta }} </div>
+                                <div class="value">{{ $nomor_peserta }}</div>
                             </div>
                             <div class="account-field">
                                 <label>Username</label>
@@ -821,7 +1235,7 @@
                     </div>
                 </div>
 
-                <!-- DATA PELAMAR -->
+                <!-- Data Pelamar -->
                 <div class="section">
                     <div class="section-header">
                         <div class="section-icon icon-blue">📄</div>
@@ -857,55 +1271,255 @@
                     </div>
                 </div>
 
-                <!-- BERKAS -->
-                <div class="section">
-                    <div class="section-header">
-                        <div class="section-icon icon-amber">📂</div>
-                        <span class="section-title">Berkas Upload</span>
-                    </div>
-                    <div class="files-list">
-                        @forelse($pelamar->files as $file)
-                            <div class="file-item">
-                                <span class="file-type-badge">{{ strtoupper($file->jenis_file) }}</span>
-                                <span class="file-name">{{ basename($file->file_path) }}</span>
-                                <div class="file-actions">
-                                    <a href="{{ asset('storage/' . $file->file_path) }}" target="_blank"
-                                        class="btn btn-view">
-                                        👁 Lihat
-                                    </a>
-                                    <a href="{{ asset('storage/' . $file->file_path) }}" download
-                                        class="btn btn-download">
-                                        ⬇ Unduh
-                                    </a>
-                                </div>
-                            </div>
-                        @empty
-                            <div class="empty-files">Tidak ada berkas yang diunggah.</div>
-                        @endforelse
-                    </div>
-                </div>
-
             </div>
 
-            <!-- ── FOOTER ── -->
+            <!-- FOOTER -->
             <div class="card-footer">
                 <div class="footer-note">
                     <span>📋</span>
-                    <span>Harap simpan nomor peserta Anda untuk keperluan seleksi.</span>
+                    <span>Simpan nomor peserta untuk keperluan seleksi.</span>
                 </div>
-                <a href="{{ url('/') }}" class="btn-home">
-                    ← Kembali Beranda
-                </a>
-                 <a href="{{ route('login') }}" class="btn-home">
-                    Halaman Login →
-                </a>
-
-
+                <a href="{{ url('/') }}" class="btn-home">← Beranda</a>
+                <a href="{{ route('login') }}" class="btn-home">Login →</a>
             </div>
 
-            <p class="print-hint">Tekan Ctrl+P untuk mencetak halaman ini sebagai bukti pendaftaran.</p>
-
+            <p class="print-hint">Cetak kartu pelamar dengan tombol di bawah atau tekan Ctrl+P.</p>
         </div>
+
+        <!-- ───────────── KARTU PESERTA FORMAL ───────────── -->
+        <div class="kartu-section">
+            <div class="kartu-section-header">
+                <span class="kartu-section-title">🪪 Kartu Peserta Pelamar</span>
+                <button class="btn-print" onclick="openModal()">
+                    🖨️ &nbsp;Cetak Kartu
+                </button>
+            </div>
+
+            <div class="print-sheet">
+                <div class="kartu-wrapper">
+                    <div class="kartu-formal">
+
+                        {{-- ── HEADER ── --}}
+                        <div class="kf-header">
+                            <div class="kf-header-accent"></div>
+                            <div class="kf-header-inner">
+                                <div class="kf-logo-circle">🏥</div>
+                                <div class="kf-header-text">
+                                    <div class="kf-header-title">KARTU PESERTA REKRUTMEN</div>
+                                    <div class="kf-header-sub">SIREKRUT — Sistem Informasi Rekrutmen Pegawai</div>
+                                </div>
+                                <div class="kf-header-badge">
+                                    <span class="kf-badge-label">No. Peserta</span>
+                                    <span class="kf-badge-nomor">{{ $pelamar->nomer_peserta }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- ── RS BAR ── --}}
+                        <div class="kf-rs-bar">
+                            <span class="kf-rs-icon">🏨</span>
+                            <div class="kf-rs-info">
+                                <div class="kf-rs-label">Mendaftar di</div>
+                                <div class="kf-rs-name">{{ $pelamar->rumahSakit->nama_rs ?? '-' }}</div>
+                            </div>
+                            <span class="kf-rs-kode">{{ $pelamar->rumahSakit->kode_rs ?? '-' }}</span>
+                        </div>
+
+                        {{-- ── BODY TWO COLUMNS ── --}}
+                        <div class="kf-body">
+                            {{-- Kolom Kiri: Data Pribadi --}}
+                            <div class="kf-col">
+                                <div class="kf-col-title">
+                                    <span>👤</span> Foto Pelamar
+                                </div>
+                                <div class="kf-row">
+                                    @php
+                                        $pasFoto = $pelamar->files->firstWhere('jenis_file', 'pas_foto');
+                                    @endphp
+
+                                    @if ($pasFoto)
+                                        <img src="{{ $pasFoto->url }}" alt="Foto Pelamar" class="foto-pelamar"
+                                            width="100%" >
+                                    @else
+                                        <div class="foto-placeholder">
+                                            Foto tidak tersedia
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            {{-- Kolom Kiri: Data Pribadi --}}
+                            <div class="kf-col">
+                                <div class="kf-col-title">
+                                    <span>👤</span> Data Pribadi
+                                </div>
+
+                                <div class="kf-row">
+                                    <span class="kf-label">Nama Lengkap</span>
+                                    <span class="kf-value highlight">{{ $pelamar->nama }}</span>
+                                </div>
+                                <div class="kf-row">
+                                    <span class="kf-label">NIK</span>
+                                    <span class="kf-value">{{ $pelamar->nik ?? '-' }}</span>
+                                </div>
+                                <div class="kf-row">
+                                    <span class="kf-label">Jenis Kelamin</span>
+                                    <span class="kf-value">{{ $pelamar->jenis_kelamin ?? '-' }}</span>
+                                </div>
+                                <div class="kf-row">
+                                    <span class="kf-label">Kota Domisili</span>
+                                    <span class="kf-value">{{ $pelamar->kota_domisili }}</span>
+                                </div>
+                                <div class="kf-row">
+                                    <span class="kf-label">Alamat</span>
+                                    <span class="kf-value">{{ $pelamar->alamat ?? '-' }}</span>
+                                </div>
+
+                                <div class="kf-divider"></div>
+
+                                <div class="kf-col-title">
+                                    <span>📞</span> Kontak
+                                </div>
+                                <div class="kf-row">
+                                    <span class="kf-label">No. Telepon</span>
+                                    <span class="kf-value">{{ $pelamar->no_hp }}</span>
+                                </div>
+                                <div class="kf-row">
+                                    <span class="kf-label">Email</span>
+                                    <span class="kf-value">{{ $pelamar->email }}</span>
+                                </div>
+                            </div>
+                            {{-- Kolom Kanan: Data Lamaran --}}
+                            <div class="kf-col">
+                                <div class="kf-col-title">
+                                    <span>📋</span> Data Lamaran
+                                </div>
+
+                                <div class="kf-row">
+                                    <span class="kf-label">Posisi Dilamar</span>
+                                    <span class="kf-value">
+                                        <span class="badge-posisi">{{ $pelamar->posisi->nama_posisi ?? '-' }}</span>
+                                    </span>
+                                </div>
+                                <div class="kf-row">
+                                    <span class="kf-label">Jenjang Pendidikan</span>
+                                    <span class="kf-value">{{ $pelamar->jenjang }}</span>
+                                </div>
+                                <div class="kf-row">
+                                    <span class="kf-label">Jenis Pelamar</span>
+                                    <span class="kf-value">{{ $pelamar->jenis_pelamar ?? '-' }}</span>
+                                </div>
+                                <div class="kf-row">
+                                    <span class="kf-label">No. Ijazah</span>
+                                    <span class="kf-value">{{ $pelamar->no_ijasah ?? '-' }}</span>
+                                </div>
+                                <div class="kf-row">
+                                    <span class="kf-label">No. STR</span>
+                                    <span class="kf-value">{{ $pelamar->no_str ?? '-' }}</span>
+                                </div>
+                                {{-- <div class="kf-row">
+                                    <span class="kf-label">Status Pelamar</span>
+                                    <span class="kf-value">
+                                        <span
+                                            class="badge-status">{{ $pelamar->status_pelamar ?? 'Terdaftar' }}</span>
+                                    </span>
+                                </div> --}}
+                            </div>
+                            <div class="kf-col">
+                                <div class="kf-col-title">
+                                    <span>💼</span> Pengalaman Kerja
+                                </div>
+                                <div class="kf-row">
+                                    <span class="kf-label">Pengalaman</span>
+                                    <span class="kf-value">{{ $pelamar->pengalaman_kerja ?? 'Tidak ada' }}</span>
+                                </div>
+                                @if ($pelamar->keterangan_pengalaman)
+                                    <div class="kf-row">
+                                        <span class="kf-label">Keterangan</span>
+                                        <span class="kf-value">{{ $pelamar->keterangan_pengalaman }}</span>
+                                    </div>
+                                @endif
+
+                                <div class="kf-divider"></div>
+                            </div>
+
+                        </div>{{-- /kf-body --}}
+
+                        {{-- ── FOOTER ── --}}
+                        <div class="kf-footer">
+                            <div class="kf-footer-left">
+                                <span class="kf-footer-label">Username</span>
+                                <span class="kf-footer-val">{{ $pelamar->username }}</span>
+                            </div>
+                            <div class="kf-footer-center">
+                                <span class="kf-footer-watermark">Dokumen ini sah sebagai bukti pendaftaran
+                                    resmi</span>
+                            </div>
+                            <div class="kf-barcode">
+                                <div class="kf-barcode-bars" id="kfBarcode"
+                                    data-code="{{ $pelamar->nomer_peserta }}">
+                                </div>
+                                <svg id="barcode" width="20" height="10"></svg>
+                            </div>
+                        </div>
+
+                    </div>{{-- /kartu-formal --}}
+                </div>{{-- /kartu-wrapper --}}
+            </div>{{-- /print-sheet --}}
+
+            <!-- Button row -->
+            <div class="btn-row">
+                <button class="btn-print" onclick="openModal()">🖨️ &nbsp;Cetak Kartu Pelamar</button>
+                <a href="{{ url('/') }}" class="btn-home" style="background:#ddf3ea;color:var(--navy);">←
+                    Beranda</a>
+            </div>
+        </div>
+
+    </div><!-- /wrapper -->
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode/dist/JsBarcode.all.min.js"></script>
+
+    <script>
+        /* ── Generate barcode bars ── */
+        JsBarcode("#barcode",
+            "{{ $pelamar->nomer_peserta }}", {
+                format: "CODE128",
+                width: 1, // ketebalan garis (kecilkan)
+                height: 25, // tinggi barcode
+                displayValue: false, // sembunyikan teks bawah
+                margin: 0,
+                lineColor: "#000",
+                background: "transparent"
+            });
+
+        /* ── Modal ── */
+        function openModal() {
+            document.getElementById('printModal').classList.add('open');
+        }
+
+        function closeModal() {
+            document.getElementById('printModal').classList.remove('open');
+        }
+
+        function doPrint() {
+            closeModal();
+            setTimeout(() => {
+                window.print();
+            }, 150);
+        }
+
+        /* Close modal on overlay click */
+        document.getElementById('printModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        /* Keyboard shortcut Ctrl+P override */
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                e.preventDefault();
+                openModal();
+            }
+        });
+    </script>
 
 </body>
 
