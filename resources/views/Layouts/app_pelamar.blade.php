@@ -1475,6 +1475,40 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .btn-tanda-terima {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            padding: 9px 18px;
+            background: linear-gradient(135deg, #116040 0%, #22a06b 100%);
+            color: #fff;
+            font-size: .83rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(34, 160, 107, .35);
+            transition: all .2s cubic-bezier(.4, 0, .2, 1);
+            white-space: nowrap;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-tanda-terima:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(34, 160, 107, .45);
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .btn-tanda-terima:active {
+            transform: translateY(0);
+        }
+
+        .btn-tanda-terima i {
+            font-size: .9rem;
+        }
     </style>
 </head>
 
@@ -1486,7 +1520,7 @@
             <div class="sb-brand">
                 <img src="{{ asset('Lambang-kabupaten-jember.png') }}" alt="Logo">
                 <div>
-                    <div class="sb-brand-name">RSD Kalisat</div>
+                    <div class="sb-brand-name">Sistem Rekrutmen</div>
                     <div class="sb-brand-sub">Portal Pelamar</div>
                 </div>
             </div>
@@ -1583,13 +1617,27 @@
                             <div>
                                 <div class="mc-num">{{ $progress }}%</div>
                                 <div class="mc-lbl">Kelengkapan Wajib</div>
+                                @if ($progress >= 100)
+                                    {{-- Tombol muncul hanya saat semua berkas wajib sudah lengkap --}}
+                                    <a href="{{ asset('file_template/12. TANDA TERIMA BERKAS PELAMAR.docx') }}"
+                                        class="btn-tanda-terima" title="Unduh Tanda Terima Berkas">
+                                        <i class="fa-solid fa-file-arrow-down"></i>
+                                        <span>Unduh Tanda Terima</span>
+                                    </a>
+                                @endif
                             </div>
+
                         </div>
                         <div class="mini-card">
                             <div class="mc-icon kuis"><i class="fa-solid fa-graduation-cap"></i></div>
                             <div>
-                                <div class="mc-num">{{ $pengerjaanList->count() }}</div>
-                                <div class="mc-lbl">Kuis Dikerjakan</div>
+                                <a href="{{ route('Pelamar.hasil', $pelamar->token) }}" class="btn-tanda-terima"
+                                    title="Unduh Kartu Pelamar">
+                                    <i class="fa-solid fa-id-card"></i>
+                                    <span>Cetak Kartu Pelamar</span>
+                                </a>
+                                {{-- <div class="mc-num">{{ $pengerjaanList->count() }}</div> --}}
+                                <div class="mc-lbl">Kartu Pelamar</div>
                             </div>
                         </div>
                     </div>
@@ -1802,11 +1850,10 @@
                                 </div>
                             </a>
 
-                            {{-- ITEM 4 — WAJIB DIGUNAKAN --}}
+                            {{-- ITEM 4 --}}
                             <a href="{{ asset('file_template/4. SURAT PERNYATAAN KEBENARAN DOKUMEN.docx') }}"
-                                class="template-box required-template" download data-name="Kebenaran Dokumen">
+                                class="template-box" download data-name="Pernyataan Kebenaran Dokumen">
                                 <div class="tb-glow"></div>
-                                <div class="tb-required-tag"><i class="fa-solid fa-star"></i> Wajib Upload</div>
                                 <div class="tb-header">
                                     <div class="template-file-icon word">
                                         <i class="fa-solid fa-file-word"></i>
@@ -1814,14 +1861,12 @@
                                     <span class="tb-ext-badge">DOCX</span>
                                 </div>
                                 <div class="template-file-name">Pernyataan Kebenaran Dokumen</div>
-                                <div class="tb-desc">Harus diisi, ditandatangani, dan diunggah sebagai berkas wajib
-                                </div>
+                                <div class="tb-desc">Surat pernyataan tentang kebenaran dokumen yang diajukan</div>
                                 <div class="template-download">
                                     <span class="td-text"><i class="fa-solid fa-download"></i> Download</span>
                                     <span class="td-arrow"><i class="fa-solid fa-arrow-right"></i></span>
                                 </div>
                             </a>
-
                         </div>{{-- /template-grid --}}
 
                     </div>{{-- /template-card-wrap --}}
@@ -1894,7 +1939,7 @@
                                             id="ffiName-{{ $key }}">{{ basename($existing->file_path) }}</span>
                                         <div class="ffi-actions">
                                             <button class="ffi-btn view" title="Lihat"
-                                                onclick="viewFile('{{ asset('storage/' . $existing->file_path) }}','{{ $ext }}')"><i
+                                                onclick="viewFile('{{ route('file.view', $existing->id) }}','{{ $ext }}')"><i
                                                     class="fa-solid fa-eye"></i></button>
                                             <label class="ffi-btn replace" title="Ganti file">
                                                 <i class="fa-solid fa-arrow-rotate-right"></i>
@@ -1913,7 +1958,7 @@
                                     ondragover="dzDrag(event,true,'{{ $key }}')"
                                     ondragleave="dzDrag(event,false,'{{ $key }}')"
                                     ondrop="dzDrop(event,'{{ $key }}')">
-                                    <input type="file" accept=".pdf"
+                                    <input type="file" accept=".pdf,.jpg,.jpeg,.png"
                                         onchange="handleUpload(this,'{{ $key }}')">
                                     <div class="dz-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
                                     <div class="dz-text"><strong>Klik</strong> atau seret file ke sini</div>
