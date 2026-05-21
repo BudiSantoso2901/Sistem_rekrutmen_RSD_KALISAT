@@ -2,7 +2,7 @@
 
 @section('title', 'Data Pelamar')
 @section('page-title', 'Data Pelamar')
-@section('breadcrumb', 'SIREKRUT / Rekrutmen / <span>Validasi Pelamar</span>')
+@section('breadcrumb', 'SIREKRUT / Rekrutmen / Validasi Pelamar')
 
 @push('styles')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
@@ -1495,6 +1495,43 @@
                 grid-template-columns: repeat(3, 1fr)
             }
         }
+
+        .ext-filter-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .export-btn {
+
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 10px 18px;
+
+            border-radius: 10px;
+
+            background: #16a34a;
+            color: #fff;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+            transition: .25s ease;
+        }
+
+        .export-btn:hover {
+
+            background: #15803d;
+
+            color: #fff;
+
+            transform: translateY(-2px);
+
+        }
     </style>
 @endpush
 
@@ -1539,12 +1576,63 @@
     </div>
 
     <div class="ext-filter-row">
-        <select class="filter-select" id="statusFilter">
-            <option value="">Semua Status</option>
-            <option value="pending">Pending</option>
-            <option value="diterima">Diterima</option>
-            <option value="ditolak">Ditolak</option>
+
+        {{-- FILTER POSISI --}}
+        <select class="filter-select" id="posisiFilter" onchange="applyFilter()">
+
+            <option value="">
+                Semua Posisi
+            </option>
+
+            @foreach ($posisis as $posisi)
+                <option value="{{ $posisi->id }}" {{ request('id_posisi') == $posisi->id ? 'selected' : '' }}>
+
+                    {{ $posisi->nama_posisi }}
+
+                </option>
+            @endforeach
+
         </select>
+
+        {{-- FILTER STATUS --}}
+        <select class="filter-select" id="statusFilter" onchange="applyFilter()">
+
+            <option value="">
+                Semua Status
+            </option>
+
+            <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>
+
+                Pending
+
+            </option>
+
+            <option value="diterima" {{ request('status') == 'diterima' ? 'selected' : '' }}>
+
+                Diterima
+
+            </option>
+
+            <option value="ditolak" {{ request('status') == 'ditolak' ? 'selected' : '' }}>
+
+                Ditolak
+
+            </option>
+
+        </select>
+
+        {{-- BUTTON EXPORT EXCEL --}}
+        <a href="{{ route('pelamar.export', [
+            'id_posisi' => request('id_posisi'),
+
+            'status' => request('status'),
+        ]) }}"
+            class="export-btn">
+
+            <i class="fa-solid fa-file-excel"></i>
+
+        </a>
+
     </div>
 
     <div class="table-wrap">
@@ -1666,7 +1754,8 @@
                 <label class="form-label-sm">Tentukan Keputusan</label>
                 <div class="status-options">
                     <div>
-                        <input type="radio" class="status-option" name="next_status" id="so_diterima" value="diterima">
+                        <input type="radio" class="status-option" name="next_status" id="so_diterima"
+                            value="diterima">
                         <label for="so_diterima" class="status-label sl-diterima">
                             <div class="sl-icon"><i class="fa-solid fa-user-check"></i></div> Diterima
                         </label>
@@ -1934,7 +2023,7 @@
             ${ii('Pengalaman',p.pengalaman_kerja)} ${ii('Keterangan',p.keterangan_pengalaman,true)}
         </div>
         ${p.catatan ? `<div class="ds-title" style="margin-top:18px"><i class="fa-solid fa-note-sticky"></i> Catatan Admin</div>
-                    <div class="info-grid">${ii('Catatan',p.catatan,true)}</div>` : ''}
+                                        <div class="info-grid">${ii('Catatan',p.catatan,true)}</div>` : ''}
         <div class="ds-title" style="margin-top:18px"><i class="fa-solid fa-clock"></i> Waktu</div>
         <div class="info-grid">${ii('Terdaftar',p.created_at)} ${ii('Diperbarui',p.updated_at)}</div>`;
 
@@ -2322,27 +2411,59 @@
     function ii(label, val, full = false) {
         const empty = !val || val === 'null' || val === '-' || String(val).trim() === '';
         return `<div class="info-item${full?' full':''}">
-                    <div class="info-key">${label}</div>
-                    <div class="info-val${empty?' empty':''}">${empty ? '—' : esc(String(val))}</div>
-                </div>`;
+                                        <div class="info-key">${label}</div>
+                                        <div class="info-val${empty?' empty':''}">${empty ? '—' : esc(String(val))}</div>
+                                    </div>`;
     }
 
     function skelHtml() {
         return `<div style="padding:4px 0">
-                    <div class="skeleton sk-line sk-med"></div>
-                    <div class="skeleton sk-line sk-short"></div>
-                    <div class="skeleton sk-line sk-full"></div>
-                </div>`;
+                                        <div class="skeleton sk-line sk-med"></div>
+                                        <div class="skeleton sk-line sk-short"></div>
+                                        <div class="skeleton sk-line sk-full"></div>
+                                    </div>`;
     }
 
     function errHtml(msg) {
         return `<p style="text-align:center;padding:30px;color:var(--red)">
-                    <i class="fa-solid fa-circle-exclamation"></i> ${msg}</p>`;
+                                        <i class="fa-solid fa-circle-exclamation"></i> ${msg}</p>`;
         }
 
         function esc(s) {
             return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g,
                 '&quot;');
+        }
+
+        function applyFilter() {
+
+            const posisi =
+                document.getElementById(
+                    'posisiFilter'
+                ).value;
+
+            const status =
+                document.getElementById(
+                    'statusFilter'
+                ).value;
+
+            const params = new URLSearchParams();
+
+            if (posisi) {
+                params.set(
+                    'id_posisi',
+                    posisi
+                );
+            }
+
+            if (status) {
+                params.set(
+                    'status',
+                    status
+                );
+            }
+
+            window.location =
+                '?' + params.toString();
         }
     </script>
 @endpush
