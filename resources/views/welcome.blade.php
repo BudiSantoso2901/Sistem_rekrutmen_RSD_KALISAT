@@ -2165,22 +2165,22 @@
                 <div class="process-step reveal">
                     <div class="step-num">1</div>
                     <div class="step-title">Kirim Lamaran</div>
-                    {{-- <div class="step-desc">11 s/d 13 Mei 2026</div> --}}
+                    {{-- <div class="step-desc">21 s/d 23 Mei 2026</div> --}}
                 </div>
                 <div class="process-step reveal">
                     <div class="step-num">2</div>
                     <div class="step-title">Seleksi Administrasi</div>
-                    {{-- <div class="step-desc">18 s/d 20 Mei 2026</div> --}}
+                    {{-- <div class="step-desc">25 s/d 26 Mei 2026</div> --}}
                 </div>
                 <div class="process-step reveal">
                     <div class="step-num">3</div>
-                    <div class="step-title">Wawancara & Test</div>
-                    {{-- <div class="step-desc">23 Mei 2026</div> --}}
+                    <div class="step-title">Seleksi Kompetensi (Test CBT) & Wawancara </div>
+                    {{-- <div class="step-desc">02 juni 2026</div> --}}
                 </div>
                 <div class="process-step reveal">
                     <div class="step-num">4</div>
                     <div class="step-title">Hasil Pengumuman</div>
-                    {{-- <div class="step-desc">22 Juni 2026</div> --}}
+                    {{-- <div class="step-desc">23 Juni 2026</div> --}}
                 </div>
             </div>
         </div>
@@ -2279,7 +2279,8 @@
 
                     <p class="section-sub">
                         Pilih rumah sakit tujuan pada formulir pendaftaran.
-                        Pastikan data yang diisi benar dan aktif untuk proses seleksi. Follow media sosial resmi rumah sakit untuk update informasi rekrutmen.
+                        Pastikan data yang diisi benar dan aktif untuk proses seleksi. Follow media sosial resmi rumah
+                        sakit untuk update informasi rekrutmen.
                     </p>
 
                     <!-- LIST RS -->
@@ -2464,7 +2465,7 @@
                                 </label>
 
                                 <input class="form-input" type="text" name="nik" maxlength="16"
-                                    data-field="nik">
+                                    inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
 
                                 <small class="error-text" data-error="nik"></small>
                             </div>
