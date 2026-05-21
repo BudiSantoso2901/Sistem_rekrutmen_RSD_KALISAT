@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PelamarExport;
 use App\Models\Kuis;
 use App\Models\Pelamar;
 use App\Models\PelamarFile;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PelamarController extends Controller
 {
@@ -107,8 +109,8 @@ class PelamarController extends Controller
             $kodeRs . '.' .
             $kodeJenis . '.' .
             // $kodePendidikan . '.' .
-            $kodePosisi ;
-            // $tahun;
+            $kodePosisi;
+        // $tahun;
 
         // =========================
         // NOMOR TERAKHIR
@@ -204,7 +206,7 @@ class PelamarController extends Controller
 
                 'nama' => 'required|string|max:255',
 
-                'nik' => 'required|string|max:16|unique:pelamars,nik',
+                'nik' => 'required|digits:16|unique:pelamars,nik',
 
                 'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
 
@@ -245,6 +247,7 @@ class PelamarController extends Controller
 
                 'nik.required' => 'NIK harus diisi.',
                 'nik.unique' => 'NIK sudah terdaftar.',
+                'nik.digits' => 'NIK harus terdiri dari 16 digit.',
 
                 'jenis_kelamin.required' => 'Jenis kelamin harus dipilih.',
                 'jenis_kelamin.in' => 'Jenis kelamin tidak valid.',
@@ -274,6 +277,23 @@ class PelamarController extends Controller
                     'errors' => [
                         'id_posisi' => [
                             'Posisi tidak tersedia pada rumah sakit yang dipilih.'
+                        ]
+                    ]
+                ], 422);
+            }
+
+            if (
+                $posisi->tanggal_ditutup &&
+                Carbon::today()->gt(
+                    Carbon::parse($posisi->tanggal_ditutup)
+                )
+            ) {
+
+                return response()->json([
+                    'success' => false,
+                    'errors' => [
+                        'id_posisi' => [
+                            'Pendaftaran untuk posisi ini sudah ditutup.'
                         ]
                     ]
                 ], 422);
@@ -412,7 +432,7 @@ class PelamarController extends Controller
     }
     public function hasil($token)
     {
-        $pelamar = Pelamar::with(['posisi', 'files'])
+        $pelamar = Pelamar::with(['posisi', 'files', 'rumahSakit'])
             ->where('token', $token)
             ->firstOrFail();
 
@@ -424,64 +444,236 @@ class PelamarController extends Controller
     }
     public function dash_it()
     {
-        // ── DATA UTAMA ─────────────────────────────────────────
-        $pelamars           = Pelamar::with(['posisi', 'files'])->latest()->get();
-        $posisis            = Posisi::all();
-        $kuis               = Kuis::with(['posisi', 'soals', 'pengerjaanPelamars'])->latest()->get();
-        $soals              = Soal::all();
-        $pengerjaanPelamars = PengerjaanPelamar::with(['pelamar', 'kuis'])->latest()->get();
+        $user = Auth::user();
 
-        // ── TREN PENDAFTARAN (12 BULAN TERAKHIR) ──────────────
+        $rsId = $user->rumah_sakit_id;
+
+        // ─────────────────────────────
+        // DATA UTAMA
+        // ─────────────────────────────
+
+        $pelamars = Pelamar::with([
+            'posisi',
+            'files',
+            'rumahSakit'
+        ])
+            ->where('rumah_sakit_id', $rsId)
+            ->latest()
+            ->get();
+
+        $posisis = Posisi::where(
+            'id_rs',
+            $rsId
+        )
+            ->get();
+
+        $kuis = Kuis::with([
+            'posisi',
+            'soals',
+            'pengerjaanPelamars'
+        ])
+            ->whereHas('posisi', function ($q)
+            use ($rsId) {
+
+                $q->where(
+                    'id_rs',
+                    $rsId
+                );
+            })
+            ->latest()
+            ->get();
+
+        $soals = Soal::whereHas(
+            'kuis.posisi',
+            function ($q) use ($rsId) {
+
+                $q->where(
+                    'id_rs',
+                    $rsId
+                );
+            }
+        )
+            ->get();
+
+        $pengerjaanPelamars =
+            PengerjaanPelamar::with([
+                'pelamar',
+                'kuis'
+            ])
+            ->whereHas(
+                'pelamar',
+                function ($q)
+                use ($rsId) {
+
+                    $q->where(
+                        'rumah_sakit_id',
+                        $rsId
+                    );
+                }
+            )
+            ->latest()
+            ->get();
+
+        // ─────────────────────────────
+        // TREN PENDAFTARAN
+        // ─────────────────────────────
+
         $trenLabels = [];
         $trenData   = [];
 
         for ($i = 11; $i >= 0; $i--) {
-            $month = Carbon::now()->subMonths($i);
-            $trenLabels[] = $month->translatedFormat('M Y');   // contoh: "Jan 2025"
-            $trenData[] = Pelamar::whereYear('created_at', $month->year)
-                ->whereMonth('created_at', $month->month)
+
+            $month =
+                Carbon::now()
+                ->subMonths($i);
+
+            $trenLabels[] =
+                $month
+                ->translatedFormat(
+                    'M Y'
+                );
+
+            $trenData[] =
+                Pelamar::where(
+                    'rumah_sakit_id',
+                    $rsId
+                )
+                ->whereYear(
+                    'created_at',
+                    $month->year
+                )
+                ->whereMonth(
+                    'created_at',
+                    $month->month
+                )
                 ->count();
         }
 
-        // ── PASS RATE PER KUIS ────────────────────────────────
+        // ─────────────────────────────
+        // PASS RATE KUIS
+        // ─────────────────────────────
+
         $kuisLabels = [];
         $kuisPass   = [];
 
         foreach ($kuis->take(8) as $k) {
-            $total   = $k->pengerjaanPelamars->count();
-            $lulus   = $k->pengerjaanPelamars->where('status', 'lulus')->count();
-            $kuisLabels[] = Str::limit($k->nama_kuis, 20);
-            $kuisPass[]   = $total > 0 ? round($lulus / $total * 100) : 0;
+
+            $total =
+                $k->pengerjaanPelamars
+                ->count();
+
+            $lulus =
+                $k->pengerjaanPelamars
+                ->where(
+                    'status',
+                    'lulus'
+                )
+                ->count();
+
+            $kuisLabels[] =
+                Str::limit(
+                    $k->nama_kuis,
+                    20
+                );
+
+            $kuisPass[] =
+                $total > 0
+                ? round(
+                    ($lulus / $total)
+                        * 100
+                )
+                : 0;
         }
 
-        // ── STATISTIK SHORTCUT ────────────────────────────────
-        $pending         = $pelamars->where('status_pelamar', 'pending')->count();
-        $lolosBerkas     = $pelamars->where('status_pelamar', 'lolos_berkas')->count();
-        $diterima        = $pelamars->where('status_pelamar', 'diterima')->count();
-        $ditolak         = $pelamars->whereIn('status_pelamar', ['ditolak', 'tidak_lolos_berkas'])->count();
+        // ─────────────────────────────
+        // STATISTIK
+        // ─────────────────────────────
 
-        $pgPending       = $pengerjaanPelamars->where('status', 'pending')->count();
-        $pgLulus         = $pengerjaanPelamars->where('status', 'lulus')->count();
-        $pgGagal         = $pengerjaanPelamars->where('status', 'gagal')->count();
+        $pending =
+            $pelamars
+            ->where(
+                'status_pelamar',
+                'pending'
+            )
+            ->count();
 
-        return view('IT.dashboard', compact(
-            'pelamars',
-            'posisis',
-            'kuis',
-            'soals',
-            'pengerjaanPelamars',
-            'trenLabels',
-            'trenData',
-            'kuisLabels',
-            'kuisPass',
-            'pending',
-            'lolosBerkas',
-            'diterima',
-            'ditolak',
-            'pgPending',
-            'pgLulus',
-            'pgGagal',
-        ));
+        $lolosBerkas =
+            $pelamars
+            ->where(
+                'status_pelamar',
+                'lolos_berkas'
+            )
+            ->count();
+
+        $diterima =
+            $pelamars
+            ->where(
+                'status_pelamar',
+                'diterima'
+            )
+            ->count();
+
+        $ditolak =
+            $pelamars
+            ->whereIn(
+                'status_pelamar',
+                [
+                    'ditolak',
+                    'tidak_lolos_berkas'
+                ]
+            )
+            ->count();
+
+        $pgPending =
+            $pengerjaanPelamars
+            ->where(
+                'status',
+                'pending'
+            )
+            ->count();
+
+        $pgLulus =
+            $pengerjaanPelamars
+            ->where(
+                'status',
+                'lulus'
+            )
+            ->count();
+
+        $pgGagal =
+            $pengerjaanPelamars
+            ->where(
+                'status',
+                'gagal'
+            )
+            ->count();
+
+        return view(
+            'IT.dashboard',
+            compact(
+
+                'pelamars',
+                'posisis',
+                'kuis',
+                'soals',
+                'pengerjaanPelamars',
+
+                'trenLabels',
+                'trenData',
+
+                'kuisLabels',
+                'kuisPass',
+
+                'pending',
+                'lolosBerkas',
+                'diterima',
+                'ditolak',
+
+                'pgPending',
+                'pgLulus',
+                'pgGagal'
+            )
+        );
     }
     public function resetPassword(Request $request, string $token)
     {
@@ -515,20 +707,82 @@ class PelamarController extends Controller
             ], 500);
         }
     }
-    public function tampil_halaman_validasi()
+    public function tampil_halaman_validasi(Request $request)
     {
         $user = auth()->user();
+
+        $posisis = Posisi::where(
+            'id_rs',
+            $user->rumah_sakit_id
+        )
+            ->orderBy('nama_posisi')
+            ->get();
 
         $pelamars = Pelamar::with([
             'posisi',
             'files',
             'rumahSakit'
         ])
-            ->where('rumah_sakit_id', $user->rumah_sakit_id)
+
+            ->where(
+                'rumah_sakit_id',
+                $user->rumah_sakit_id
+            )
+
+            ->when(
+                $request->id_posisi,
+                function ($q) use ($request) {
+
+                    $q->where(
+                        'id_posisi',
+                        $request->id_posisi
+                    );
+                }
+            )
+
+            ->when(
+                $request->status,
+                function ($q) use ($request) {
+
+                    $q->where(
+                        'status_pelamar',
+                        $request->status
+                    );
+                }
+            )
+
             ->latest()
             ->get();
 
-        return view('Pelamar.view', compact('pelamars'));
+        return view(
+            'Pelamar.view',
+            compact(
+                'pelamars',
+                'posisis'
+            )
+        );
+    }
+    public function exportExcel(Request $request)
+    {
+        $user = auth()->user();
+
+        $tanggal = now()->format('Y-m-d');
+
+        return Excel::download(
+
+            new PelamarExport(
+
+                $user,
+
+                $request->id_posisi,
+
+                $request->status
+
+            ),
+
+            "Pelamar_{$tanggal}.xlsx"
+
+        );
     }
     public function validasi(Request $request, $token)
     {
@@ -670,6 +924,17 @@ class PelamarController extends Controller
 
     ];
 
+    private function resolveJenisFile(string $jenisPelamar): array
+    {
+        return collect(self::JENIS_FILE)
+            ->map(function (array $meta, string $key) use ($jenisPelamar) {
+                if ($key === 'str_sip') {
+                    $meta['required'] = ($jenisPelamar === 'nakes');
+                }
+                return $meta;
+            })
+            ->toArray();
+    }
     // ══════════════════════════════════════════
     //  DASHBOARD — tampilan utama pelamar
     // ══════════════════════════════════════════
@@ -680,7 +945,7 @@ class PelamarController extends Controller
         $pelamar->load(['posisi', 'files', 'pengerjaanPelamars.kuis']);
 
         $uploadedFiles  = $pelamar->files->keyBy('jenis_file');
-        $jenisFile      = self::JENIS_FILE;
+        $jenisFile = $this->resolveJenisFile($pelamar->jenis_pelamar);
 
         // hitung kelengkapan berkas
         $required  = collect($jenisFile)->where('required', true)->keys();
@@ -712,13 +977,32 @@ class PelamarController extends Controller
     {
         $request->validate([
             'jenis_file' => ['required', 'string', 'in:' . implode(',', array_keys(self::JENIS_FILE))],
-            'file'       => ['required', 'file', 'mimes:pdf', 'max:1024'], // 1 MB
+            'file'       => ['required', 'file', 'mimes:pdf,jpg,jpeg,png', 'max:1024'], // 1 MB
         ], [
-            'file.mimes' => 'Format file harus PDF.',
+            'file.mimes' => 'Format file harus PDF atau gambar.',
             'file.max'   => 'Ukuran file maksimal 1 MB.',
         ]);
 
         $pelamar  = Auth::guard('pelamar')->user();
+        $posisi = $pelamar->posisi;
+        if (
+            $posisi &&
+            $posisi->tanggal_ditutup &&
+            Carbon::today()->gt(
+                Carbon::parse($posisi->tanggal_ditutup)
+            )
+        ) {
+
+            return response()->json([
+
+                'success' => false,
+
+                'message' =>
+                'Upload file tidak dapat dilakukan karena masa pendaftaran telah berakhir.'
+
+            ], 422);
+        }
+
         $jenis    = $request->jenis_file;
         $existing = PelamarFile::where('pelamar_id', $pelamar->id)
             ->where('jenis_file', $jenis)->first();
@@ -779,7 +1063,7 @@ class PelamarController extends Controller
     }
 
     // ══════════════════════════════════════════
-    //  TAMBAH JENIS FILE KUSTOM (oleh admin)
+    //  TAMBAH JENIS FILE KUSTOM (oleh admin)s
     //  — route ini diproteksi role SDM/IT
     // ══════════════════════════════════════════
     public static function getAllJenis(): array
