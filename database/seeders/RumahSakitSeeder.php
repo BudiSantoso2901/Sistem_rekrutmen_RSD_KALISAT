@@ -12,15 +12,15 @@ class RumahSakitSeeder extends Seeder
         $data = [
             [
                 'nama_rs' => 'RSD Soebandi',
-                'kode_rs' => '1',
+                'kode_rs' => '01',
             ],
             [
                 'nama_rs' => 'RSD Balung',
-                'kode_rs' => '2',
+                'kode_rs' => '02',
             ],
             [
                 'nama_rs' => 'RSD Kalisat',
-                'kode_rs' => '3',
+                'kode_rs' => '03',
             ],
         ];
 

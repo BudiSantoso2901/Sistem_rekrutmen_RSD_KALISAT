@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
             'email' => 'adminit@example.com',
             'role' => 'IT',
             'password' => Hash::make('rsdsoebandi2026'),
+            'rumah_sakit_id' => 1,
         ]);
 
         User::create([
@@ -28,6 +29,7 @@ class UserSeeder extends Seeder
             'email' => 'sdm166@example.com',
             'role' => 'IT',
             'password' => Hash::make('rsdbalung2026'),
+            'rumah_sakit_id' => 2,
         ]);
 
          User::create([
@@ -36,6 +38,7 @@ class UserSeeder extends Seeder
             'email' => 'sdm125@example.com',
             'role' => 'IT',
             'password' => Hash::make('rsdkalisat2026'),
+            'rumah_sakit_id' => 3,
         ]);
     }
 }
