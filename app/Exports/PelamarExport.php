@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 
 class PelamarExport implements
     FromCollection,
@@ -22,7 +23,6 @@ class PelamarExport implements
     WithStyles,
     WithEvents
 {
-
     protected $user;
     protected $id_posisi;
     protected $status;
@@ -32,7 +32,6 @@ class PelamarExport implements
         $id_posisi = null,
         $status = null
     ) {
-
         $this->user = $user;
         $this->id_posisi = $id_posisi;
         $this->status = $status;
@@ -52,13 +51,11 @@ class PelamarExport implements
         'surat_pernyataan' => true,
         'surat_lamaran' => true,
         'surat_tidak_menuntut_diangkat_asn' => true,
-
     ];
 
     public function collection()
     {
-
-        $query = Pelamar::with([
+        return Pelamar::with([
             'posisi',
             'files',
             'rumahSakit'
@@ -71,9 +68,9 @@ class PelamarExport implements
 
             ->when(
                 $this->id_posisi,
-                function ($q) {
+                function ($query) {
 
-                    $q->where(
+                    $query->where(
                         'id_posisi',
                         $this->id_posisi
                     );
@@ -82,17 +79,17 @@ class PelamarExport implements
 
             ->when(
                 $this->status,
-                function ($q) {
+                function ($query) {
 
-                    $q->where(
+                    $query->where(
                         'status_pelamar',
                         $this->status
                     );
                 }
-            );
+            )
 
-        return $query
             ->latest()
+
             ->get()
 
             ->map(function ($pelamar) {
@@ -108,27 +105,14 @@ class PelamarExport implements
                     $pelamar
                 ) {
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | STR khusus non nakes
-                    |--------------------------------------------------------------------------
-                    */
-
                     if (
                         $jenis === 'str_sip'
                         &&
-                        $pelamar->jenis_pelamar
-                        !== 'nakes'
+                        $pelamar->jenis_pelamar !== 'nakes'
                     ) {
 
                         return '—';
                     }
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | FILE ADA
-                    |--------------------------------------------------------------------------
-                    */
 
                     if (
                         in_array(
@@ -139,12 +123,6 @@ class PelamarExport implements
 
                         return '✔';
                     }
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | WAJIB BELUM ADA
-                    |--------------------------------------------------------------------------
-                    */
 
                     return self::JENIS_FILE[$jenis]
                         ? '✘'
@@ -209,52 +187,34 @@ class PelamarExport implements
                     $statusFile('cv'),
 
                     'Ijazah' =>
-                    $statusFile(
-                        'ijazah_transkrip'
-                    ),
+                    $statusFile('ijazah_transkrip'),
 
                     'KTP' =>
                     $statusFile('ktp'),
 
                     'Pas Foto' =>
-                    $statusFile(
-                        'pas_foto'
-                    ),
+                    $statusFile('pas_foto'),
 
                     'STR/SIP' =>
-                    $statusFile(
-                        'str_sip'
-                    ),
+                    $statusFile('str_sip'),
 
                     'Sertifikat' =>
-                    $statusFile(
-                        'sertifikat'
-                    ),
+                    $statusFile('sertifikat'),
 
                     'Surat Pengalaman' =>
-                    $statusFile(
-                        'surat_pengalaman'
-                    ),
+                    $statusFile('surat_pengalaman'),
 
                     'SKCK' =>
-                    $statusFile(
-                        'skck'
-                    ),
+                    $statusFile('skck'),
 
                     'Surat Sehat' =>
-                    $statusFile(
-                        'surat_sehat'
-                    ),
+                    $statusFile('surat_sehat'),
 
                     'Surat Pernyataan' =>
-                    $statusFile(
-                        'surat_pernyataan'
-                    ),
+                    $statusFile('surat_pernyataan'),
 
                     'Surat Lamaran' =>
-                    $statusFile(
-                        'surat_lamaran'
-                    ),
+                    $statusFile('surat_lamaran'),
 
                     'Tidak Menuntut ASN' =>
                     $statusFile(
@@ -266,7 +226,6 @@ class PelamarExport implements
 
     public function headings(): array
     {
-
         return [
 
             'Nomor Peserta',
@@ -298,7 +257,6 @@ class PelamarExport implements
             'Surat Pernyataan',
             'Surat Lamaran',
             'Tidak Menuntut ASN',
-
         ];
     }
 
@@ -317,7 +275,6 @@ class PelamarExport implements
                     'color' => [
                         'rgb' => 'FFFFFF'
                     ]
-
                 ],
 
                 'fill' => [
@@ -328,17 +285,13 @@ class PelamarExport implements
                     'startColor' => [
                         'rgb' => '2563EB'
                     ]
-
                 ]
-
             ]
-
         ];
     }
 
     public function registerEvents(): array
     {
-
         return [
 
             AfterSheet::class => function (
@@ -352,14 +305,11 @@ class PelamarExport implements
 
                 /*
                 |--------------------------------------------------------------------------
-                | FREEZE HEADER
+                | Freeze Header
                 |--------------------------------------------------------------------------
                 */
 
-                $sheet
-                    ->freezePane(
-                        'A2'
-                    );
+                $sheet->freezePane('A2');
 
                 $highestRow =
                     $sheet
@@ -367,7 +317,7 @@ class PelamarExport implements
 
                 /*
                 |--------------------------------------------------------------------------
-                | WARNA STATUS FILE
+                | Status File Coloring
                 |--------------------------------------------------------------------------
                 */
 
@@ -377,13 +327,20 @@ class PelamarExport implements
                     $row++
                 ) {
 
-                    foreach (
-                        range('Q', 'AB')
-                        as $col
+                    for (
+                        $col = 17;
+                        $col <= 28;
+                        $col++
                     ) {
 
+                        $columnLetter =
+                            Coordinate
+                            ::stringFromColumnIndex(
+                                $col
+                            );
+
                         $cell =
-                            $col . $row;
+                            $columnLetter . $row;
 
                         $value =
                             $sheet
@@ -427,7 +384,6 @@ class PelamarExport implements
                     }
                 }
             }
-
         ];
     }
 }

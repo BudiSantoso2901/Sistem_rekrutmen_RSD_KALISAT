@@ -1619,7 +1619,7 @@
                                 <div class="mc-lbl">Kelengkapan Wajib</div>
                                 @if ($progress >= 100)
                                     {{-- Tombol muncul hanya saat semua berkas wajib sudah lengkap --}}
-                                    <a href="{{ asset('file_template/12. TANDA TERIMA BERKAS PELAMAR.docx') }}"
+                                    <a href="{{ asset('file_template/12. TANDA TERIMA BERKAS PELAMAR2.docx') }}"
                                         class="btn-tanda-terima" title="Unduh Tanda Terima Berkas">
                                         <i class="fa-solid fa-file-arrow-down"></i>
                                         <span>Unduh Tanda Terima</span>
@@ -1842,7 +1842,7 @@
                                     </div>
                                     <span class="tb-ext-badge">DOCX</span>
                                 </div>
-                                <div class="template-file-name">Pernyataan Tidak Menuntut ASN</div>
+                                <div class="template-file-name">Surat Pernyataan Tidak Menuntut Diangkat ASN</div>
                                 <div class="tb-desc">Surat pernyataan tidak menuntut pengangkatan sebagai ASN</div>
                                 <div class="template-download">
                                     <span class="td-text"><i class="fa-solid fa-download"></i> Download</span>
@@ -1860,7 +1860,7 @@
                                     </div>
                                     <span class="tb-ext-badge">DOCX</span>
                                 </div>
-                                <div class="template-file-name">Pernyataan Kebenaran Dokumen</div>
+                                <div class="template-file-name">Surat Pernyataan Keaslian Dokumen</div>
                                 <div class="tb-desc">Surat pernyataan tentang kebenaran dokumen yang diajukan</div>
                                 <div class="template-download">
                                     <span class="td-text"><i class="fa-solid fa-download"></i> Download</span>
