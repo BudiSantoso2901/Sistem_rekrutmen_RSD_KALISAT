@@ -2016,11 +2016,13 @@
             ${ii('Jenis Kelamin',p.jenis_kelamin)} ${ii('Kota Domisili',p.kota_domisili)}
             ${ii('Jenjang',p.jenjang)} ${ii('Jenis Pelamar',p.jenis_pelamar)}
             ${ii('Rumah Sakit Yang Dipilih',p.nama_rs)}
-            ${ii('No. STR',p.no_str)} ${ii('Alamat',p.alamat,true)}
+            ${ii('Tempat Lahir',p.tempat_lahir)} ${ii('Tanggal Lahir',p.tanggal_lahir)}
+            ${ii('Usia',p.usia)}
+            ${ii('No. STR',p.no_str,true)} ${ii('Alamat',p.alamat,true)}
         </div>
         <div class="ds-title" style="margin-top:18px"><i class="fa-solid fa-briefcase"></i> Pengalaman</div>
         <div class="info-grid">
-            ${ii('Pengalaman',p.pengalaman_kerja)} ${ii('Keterangan',p.keterangan_pengalaman,true)}
+            ${ii('Pengalaman',p.pengalaman_kerja)} ${ii('Keterangan',p.keterangan_pengalaman)}
         </div>
         ${p.catatan ? `<div class="ds-title" style="margin-top:18px"><i class="fa-solid fa-note-sticky"></i> Catatan Admin</div>
                                         <div class="info-grid">${ii('Catatan',p.catatan,true)}</div>` : ''}

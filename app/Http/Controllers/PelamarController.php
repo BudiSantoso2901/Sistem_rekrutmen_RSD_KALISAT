@@ -894,6 +894,9 @@ class PelamarController extends Controller
                 'jenis_kelamin'           => $pelamar->jenis_kelamin,
                 'kota_domisili'           => $pelamar->kota_domisili,
                 'alamat'                  => $pelamar->alamat,
+                'tempat_lahir'            => $pelamar->tempat_lahir,
+                'tanggal_lahir'           => $pelamar->tanggal_lahir?->format('d M Y'),
+                'usia'                    => $pelamar->usia,
 
                 // Info Pendaftaran
                 'nomer_peserta'           => $pelamar->nomer_peserta,
@@ -917,6 +920,8 @@ class PelamarController extends Controller
 
                 // Rumah Sakit
                 'nama_rs'                => $pelamar->rumahSakit?->nama_rs,
+
+                //
 
                 // Berkas (files)
                 'files' => $pelamar->files->map(fn($f) => [

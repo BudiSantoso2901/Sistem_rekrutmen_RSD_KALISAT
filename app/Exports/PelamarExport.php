@@ -137,11 +137,20 @@ class PelamarExport implements
                     'Nama' =>
                     $pelamar->nama,
 
-                    'NIK' =>
-                    $pelamar->nik,
+                    'NIK' => "'" .
+                        $pelamar->nik,
 
                     'Jenis Kelamin' =>
                     $pelamar->jenis_kelamin,
+
+                    'Tempat Lahir' =>
+                    $pelamar->tempat_lahir,
+
+                    'Tanggal Lahir' =>
+                    $pelamar->tanggal_lahir?->format('d M Y'),
+
+                    'Usia' =>
+                    $pelamar->usia,
 
                     'Jenis Pelamar' =>
                     $pelamar->jenis_pelamar,
@@ -149,8 +158,8 @@ class PelamarExport implements
                     'Email' =>
                     $pelamar->email,
 
-                    'No HP' =>
-                    $pelamar->no_hp,
+                    'No HP' => '"' .
+                        $pelamar->no_hp,
 
                     'Kota Domisili' =>
                     $pelamar->kota_domisili,
@@ -160,6 +169,12 @@ class PelamarExport implements
 
                     'Alamat' =>
                     $pelamar->alamat,
+
+                    'no_ijasah' => "'" .
+                    $pelamar->no_ijasah,
+
+                    'no_str' => "'" .
+                    $pelamar->no_str,
 
                     'Pengalaman Kerja' =>
                     $pelamar->pengalaman_kerja,
@@ -232,19 +247,23 @@ class PelamarExport implements
             'Nama',
             'NIK',
             'Jenis Kelamin',
+            'Tempat Lahir',
+            'Tanggal Lahir',
+            'Usia',
             'Jenis Pelamar',
             'Email',
             'No HP',
             'Kota Domisili',
             'Jenjang',
             'Alamat',
+            'No Ijasah',
+            'No STR',
             'Pengalaman Kerja',
             'Ket. Pengalaman',
             'Catatan',
             'Posisi',
             'Rumah Sakit',
             'Status',
-
             'CV',
             'Ijazah',
             'KTP',
