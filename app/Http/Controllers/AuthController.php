@@ -150,7 +150,7 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()
-            ->route('login');
+            ->route('pelamar.form');
     }
 
     private function redirectByRole($role)

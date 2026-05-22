@@ -33,6 +33,9 @@ class Pelamar extends Authenticatable
         'status_pelamar',
         'token',
         'catatan',
+        'tempat_lahir',
+        'tanggal_lahir',
+        'usia',
     ];
 
     protected $hidden = [

@@ -235,6 +235,12 @@ class PelamarController extends Controller
 
                 'keterangan_pengalaman' => 'nullable|string',
 
+                'tempat_lahir' => 'required|string|max:100',
+
+                'tanggal_lahir' => 'required|date|before:today',
+
+                'usia' => 'required|integer',
+
             ], [
 
                 'id_posisi.required' => 'Posisi harus dipilih.',
@@ -260,6 +266,12 @@ class PelamarController extends Controller
                 'email.required' => 'Email harus diisi.',
                 'email.email' => 'Format email tidak valid.',
                 'email.unique' => 'Email sudah terdaftar.',
+                'tempat_lahir.required' => 'Tempat lahir harus diisi.',
+                'tanggal_lahir.required' => 'Tanggal lahir harus diisi.',
+                'tanggal_lahir.date' => 'Format tanggal lahir tidak valid.',
+                'tanggal_lahir.before' => 'Tanggal lahir harus sebelum hari ini.',
+                'usia.required' => 'Usia harus diisi.',
+                'usia.integer' => 'Usia harus berupa angka.',
             ]);
 
             // ======================
@@ -369,6 +381,12 @@ class PelamarController extends Controller
                 'keterangan_pengalaman' => $validated['keterangan_pengalaman'],
 
                 'nomer_peserta' => $nomor_peserta,
+
+                'tempat_lahir' => $validated['tempat_lahir'],
+
+                'tanggal_lahir' => $validated['tanggal_lahir'],
+
+                'usia' => $validated['usia'],
 
                 'token' => $token,
             ]);

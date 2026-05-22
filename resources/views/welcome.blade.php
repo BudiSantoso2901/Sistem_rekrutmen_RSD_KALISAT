@@ -2187,7 +2187,7 @@
     </section>
 
     <!-- ─── TESTIMONIALS ─── -->
-    <section class="testimonials-section">
+    {{-- <section class="testimonials-section">
         <div class="section-inner">
             <div class="section-header center reveal">
                 <div class="section-tag">Cerita Sukses</div>
@@ -2203,10 +2203,10 @@
                                 biasa membuat saya terus berkembang setiap hari."</p>
                             <div class="testi-author">
                                 <div class="testi-avatar" style="background:#0d6e4e">SR</div>
-                                {{-- <div>
+                                <div>
                                     <div class="testi-name">dr. Sari Rahayu, Sp.PD</div>
                                     <div class="testi-role">Dokter Spesialis Penyakit Dalam · 3 tahun</div>
-                                </div> --}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2218,10 +2218,10 @@
                                 keperawatan yang luar biasa ini."</p>
                             <div class="testi-author">
                                 <div class="testi-avatar" style="background:#f4a827">BW</div>
-                                {{-- <div>
+                                <div>
                                     <div class="testi-name">Budi Wicaksono, S.Kep</div>
                                     <div class="testi-role">Perawat Senior ICU · 5 tahun</div>
-                                </div> --}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2233,10 +2233,10 @@
                                 sini benar-benar mendukung pengembangan profesional."</p>
                             <div class="testi-author">
                                 <div class="testi-avatar" style="background:#e85d5d">LA</div>
-                                {{-- <div>
+                                <div>
                                     <div class="testi-name">Linda Anggraini, M.Farm</div>
                                     <div class="testi-role">Kepala Instalasi Farmasi · 4 tahun</div>
-                                </div> --}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2248,10 +2248,10 @@
                                 meningkatkan kompetensi teknis saya secara signifikan."</p>
                             <div class="testi-author">
                                 <div class="testi-avatar" style="background:#4a90d9">RP</div>
-                                {{-- <div>
+                                <div>
                                     <div class="testi-name">Rizky Pratama, A.Md.AK</div>
                                     <div class="testi-role">Analis Laboratorium · 2 tahun</div>
-                                </div> --}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2259,7 +2259,7 @@
                 <div class="swiper-pagination"></div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- ─── FORM DAFTAR ─── -->
     <section class="form-section" id="daftar">
@@ -2442,6 +2442,32 @@
                             </div>
 
                         </div>
+                        {{-- JENIS PELAMAR --}}
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                Jenis Pelamar *
+                            </label>
+
+                            <select class="form-select" name="jenis_pelamar" data-field="jenis_pelamar">
+
+                                <option value="">
+                                    — Pilih Jenis Pelamar —
+                                </option>
+
+                                <option value="nakes">
+                                    Tenaga Kesehatan
+                                </option>
+
+                                <option value="non_nakes">
+                                    Non Tenaga Kesehatan
+                                </option>
+
+                            </select>
+
+                            <small class="error-text" data-error="jenis_pelamar"></small>
+                        </div>
+
 
                         <!-- ===================== -->
                         <!-- IDENTITAS -->
@@ -2454,7 +2480,7 @@
                                     Nama Lengkap *
                                 </label>
 
-                                <input class="form-input" type="text" name="nama" data-field="nama">
+                                <input class="form-input" type="text" name="nama" data-field="nama" required>
 
                                 <small class="error-text" data-error="nama"></small>
                             </div>
@@ -2465,7 +2491,7 @@
                                 </label>
 
                                 <input class="form-input" type="text" name="nik" maxlength="16"
-                                    inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+                                    inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,'')" required>
 
                                 <small class="error-text" data-error="nik"></small>
                             </div>
@@ -2483,7 +2509,7 @@
                                     Email *
                                 </label>
 
-                                <input class="form-input" type="email" name="email" data-field="email">
+                                <input class="form-input" type="email" name="email" data-field="email" required>
 
                                 <small class="error-text" data-error="email"></small>
                             </div>
@@ -2493,7 +2519,7 @@
                                     No. Telepon *
                                 </label>
 
-                                <input class="form-input" type="text" name="no_hp" data-field="no_hp">
+                                <input class="form-input" type="text" name="no_hp" data-field="no_hp" required>
 
                                 <small class="error-text" data-error="no_hp"></small>
                             </div>
@@ -2529,30 +2555,28 @@
 
                                 <small class="error-text" data-error="jenis_kelamin"></small>
                             </div>
-
                             <div class="form-group">
                                 <label class="form-label">
-                                    Jenis Pelamar *
+                                    Tempat Lahir *
                                 </label>
-
-                                <select class="form-select" name="jenis_pelamar" data-field="jenis_pelamar">
-
-                                    <option value="">
-                                        — Pilih Jenis Pelamar —
-                                    </option>
-
-                                    <option value="nakes">
-                                        Tenaga Kesehatan
-                                    </option>
-
-                                    <option value="non_nakes">
-                                        Non Tenaga Kesehatan
-                                    </option>
-
-                                </select>
-
-                                <small class="error-text" data-error="jenis_pelamar"></small>
+                                <input class="form-input" type="text" name="tempat_lahir" data-field="tempat_lahir" required>
+                                <small class="error-text" data-error="tempat_lahir"></small>
                             </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Tanggal Lahir *
+                                </label>
+                                <input class="form-input" type="date" name="tanggal_lahir" data-field="tanggal_lahir" required>
+                                <small class="error-text" data-error="tanggal_lahir"></small>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                   Usia *
+                                </label>
+                                <input class="form-input" type="number" name="usia" data-field="usia" required>
+                                <small class="error-text" data-error="usia"></small>
+                            </div>
+
 
                         </div>
 
@@ -2612,7 +2636,7 @@
                                 </label>
 
                                 <input class="form-input" type="text" name="kota_domisili"
-                                    data-field="kota_domisili">
+                                    data-field="kota_domisili" required>
 
                                 <small class="error-text" data-error="kota_domisili"></small>
                             </div>
@@ -2646,7 +2670,7 @@
                                 No Ijasah *
                             </label>
 
-                            <input class="form-input" type="text" name="no_ijasah" data-field="no_ijasah">
+                            <input class="form-input" type="text" name="no_ijasah" data-field="no_ijasah" required>
 
                             <small class="error-text" data-error="no_ijasah"></small>
                         </div>
@@ -2661,7 +2685,7 @@
                                 Alamat
                             </label>
 
-                            <textarea class="form-textarea" name="alamat" data-field="alamat"></textarea>
+                            <textarea class="form-textarea" name="alamat" data-field="alamat" required></textarea>
 
                             <small class="error-text" data-error="alamat"></small>
 
@@ -2718,56 +2742,31 @@
 
     <!-- ─── FAQ ─── -->
     <section class="faq-section" id="faq">
+
         <div class="section-inner">
+
             <div class="section-header center reveal">
-                <div class="section-tag">FAQ</div>
-                <h2>Pertanyaan yang <span>Sering Ditanyakan</span></h2>
+
+                <div class="section-tag">
+                    FAQ
+                </div>
+
+                <h2>
+                    Pertanyaan yang
+                    <span>Sering Ditanyakan</span>
+                </h2>
+
             </div>
-            <div class="faq-grid reveal" id="faqGrid">
-                <div class="faq-item">
-                    <div class="faq-q" onclick="toggleFAQ(this)">
-                        Apakah ada biaya pendaftaran? <i class="fas fa-chevron-down faq-arrow"></i>
-                    </div>
-                    <div class="faq-a">Tidak ada biaya apapun dalam seluruh proses rekrutmen kami. Proses seleksi
-                        sepenuhnya gratis dan transparan.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-q" onclick="toggleFAQ(this)">
-                        Berapa lama proses seleksi berlangsung? <i class="fas fa-chevron-down faq-arrow"></i>
-                    </div>
-                    <div class="faq-a">Proses seleksi umumnya berlangsung 2–4 minggu, tergantung posisi yang dilamar.
-                        Anda akan mendapat notifikasi di setiap tahap.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-q" onclick="toggleFAQ(this)">
-                        Dokumen apa saja yang diperlukan? <i class="fas fa-chevron-down faq-arrow"></i>
-                    </div>
-                    <div class="faq-a">CV terbaru, fotokopi ijazah & transkrip nilai, STR/SIP (bagi tenaga medis),
-                        sertifikat kompetensi, dan pas foto terbaru.</div>
-                </div>
-                {{-- <div class="faq-item">
-                    <div class="faq-q" onclick="toggleFAQ(this)">
-                        Apakah ada program untuk Fresh Graduate? <i class="fas fa-chevron-down faq-arrow"></i>
-                    </div>
-                    <div class="faq-a">Ya! Kami memiliki program Management Trainee dan Fresh Graduate Program khusus
-                        untuk lulusan baru dengan mentoring intensif selama 6 bulan.</div>
-                </div> --}}
-                {{-- <div class="faq-item">
-                    <div class="faq-q" onclick="toggleFAQ(this)">
-                        Apakah ada fasilitas perumahan dinas? <i class="fas fa-chevron-down faq-arrow"></i>
-                    </div>
-                    <div class="faq-a">Beberapa posisi tertentu (terutama dokter spesialis di daerah) mendapatkan
-                        fasilitas perumahan dinas atau tunjangan perumahan.</div>
-                </div> --}}
-                {{-- <div class="faq-item">
-                    <div class="faq-q" onclick="toggleFAQ(this)">
-                        Bagaimana cara memantau status lamaran? <i class="fas fa-chevron-down faq-arrow"></i>
-                    </div>
-                    <div class="faq-a">Setelah mengirim lamaran, Anda akan menerima email konfirmasi beserta nomor
-                        referensi untuk memantau status lamaran secara online.</div>
-                </div> --}}
+
+            <div class="pdf-container">
+
+                <iframe src="/faq-preview" width="100%" height="900">
+                </iframe>
+
             </div>
+
         </div>
+
     </section>
 
     <!-- ─── FOOTER ─── -->

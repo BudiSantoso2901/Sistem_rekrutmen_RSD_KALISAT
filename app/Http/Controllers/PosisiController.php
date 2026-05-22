@@ -16,40 +16,73 @@ class PosisiController extends Controller
 
         if ($request->ajax()) {
 
-            $query = Posisi::with('rumahSakit');
+            $data = Posisi::with('rumahSakit')
 
-            // tampilkan posisi sesuai RS user login
-            $query->where('id_rs', $user->rumah_sakit_id);
+                // Filter sesuai RS user login
+                ->where(
+                    'id_rs',
+                    $user->rumah_sakit_id
+                )
+                ->orderBy('id', 'asc')
+                ->get()
 
-            $data = $query->latest()->get()->map(function ($item) {
+                ->map(function ($item) {
 
-                return [
-                    'id' => $item->id,
+                    return [
 
-                    'nama_posisi' => $item->nama_posisi,
+                        'id' =>
+                        $item->id,
 
-                    'kode_pelamar' => $item->kode_pelamar,
+                        'nama_posisi' =>
+                        $item->nama_posisi,
 
-                    'deskripsi_posisi' => $item->deskripsi_posisi,
+                        'kode_pelamar' =>
+                        $item->kode_pelamar,
 
-                    'tanggal_ditutup' => $item->tanggal_ditutup,
+                        'deskripsi_posisi' =>
+                        $item->deskripsi_posisi,
 
-                    'id_rs' => $item->id_rs,
+                        'tanggal_ditutup' =>
+                        $item->tanggal_ditutup,
 
-                    'nama_rs' => $item->rumahSakit->nama_rs ?? '-',
+                        'id_rs' =>
+                        $item->id_rs,
 
-                    'created_at' => $item->created_at->format('Y-m-d H:i:s'),
-                ];
-            });
+                        'nama_rs' =>
+                        optional(
+                            $item->rumahSakit
+                        )->nama_rs ?? '-',
+
+                        'created_at' =>
+                        optional(
+                            $item->created_at
+                        )?->format(
+                            'Y-m-d H:i:s'
+                        ),
+                    ];
+                });
 
             return response()->json($data);
         }
 
-        return view('IT.Posisi', [
-            'rumahSakits' => RumahSakit::where('id', $user->rumah_sakit_id)
-                ->orderBy('nama_rs')
-                ->get()
-        ]);
+        return view(
+            'IT.Posisi',
+            [
+
+                'rumahSakits' =>
+                RumahSakit::where(
+                    'id',
+                    $user->rumah_sakit_id
+                )
+
+                    ->orderBy(
+                        'nama_rs',
+                        'asc'
+                    )
+
+                    ->get()
+            ]
+        );
     }
 
     // 🔥 CREATE + UPDATE (1 function)

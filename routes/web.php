@@ -6,6 +6,7 @@ use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\PosisiController;
 use App\Http\Controllers\HasilKuisController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,15 @@ Route::post('/login-prosess', [AuthController::class, 'proses_login'])->name('lo
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/file/view/{id}', [PelamarController::class, 'viewFile'])
     ->name('file.view');
+
+Route::get('/faq-preview', function () {
+
+    $path = public_path(
+        'file_template/faq.pdf'
+    );
+
+    return Response::file($path);
+});
 
 Route::middleware(['auth'])->group(function () {
     // IT
