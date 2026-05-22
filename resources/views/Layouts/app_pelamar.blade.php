@@ -1962,7 +1962,7 @@
                                         onchange="handleUpload(this,'{{ $key }}')">
                                     <div class="dz-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
                                     <div class="dz-text"><strong>Klik</strong> atau seret file ke sini</div>
-                                    <div class="dz-hint">PDF · Maks. 1 MB</div>
+                                    <div class="dz-hint">{{ $meta['hint'] ?? 'PDF · Maks. 1 MB' }}</div>
                                 </div>
 
                             </div>

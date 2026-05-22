@@ -932,18 +932,18 @@ class PelamarController extends Controller
         ]);
     }
     private const JENIS_FILE = [
-        'cv'                    => ['label' => 'Curriculum Vitae (CV)',              'icon' => 'fa-user',             'required' => true],
-        'ijazah_transkrip'      => ['label' => 'Ijazah & Transkrip Nilai',           'icon' => 'fa-graduation-cap',   'required' => true],
-        'ktp'                   => ['label' => 'Fotokopi KTP',                       'icon' => 'fa-id-card',          'required' => true],
-        'pas_foto'              => ['label' => 'Pas Foto Terbaru',                   'icon' => 'fa-image',            'required' => true],
-        'str_sip'               => ['label' => 'STR (Wajib bagi Tenaga Kesehatan)',             'icon' => 'fa-file-medical',     'required' => false],
-        'sertifikat'            => ['label' => 'Sertifikat Pelatihan (Boleh Lebih dari 1)',  'icon' => 'fa-certificate',      'required' => false],
-        'surat_pengalaman'      => ['label' => 'Surat Pengalaman Kerja',             'icon' => 'fa-briefcase',        'required' => false],
-        'skck'                  => ['label' => 'SKCK',                               'icon' => 'fa-shield-halved',    'required' => true],
-        'surat_sehat'           => ['label' => 'Surat Keterangan Sehat',             'icon' => 'fa-stethoscope',      'required' => true],
-        'surat_pernyataan'      => ['label' => 'Surat Pernyataan Keaslian Dokumen', 'icon' => 'fa-file-signature',   'required' => true],
-        'surat_lamaran'         => ['label' => 'Surat Lamaran Pekerjaan',            'icon' => 'fa-file-signature',   'required' => true],
-        'surat_tidak_menuntut_diangkat_asn'         => ['label' => 'Surat Pernyataan Tidak Menuntut Diangkat ASN',            'icon' => 'fa-file-signature',   'required' => true],
+        'cv'                    => ['label' => 'Curriculum Vitae (CV)',              'icon' => 'fa-user',             'required' => true, 'hint' => 'PDF  · Maks. 1 MB'],
+        'ijazah_transkrip'      => ['label' => 'Ijazah & Transkrip Nilai',           'icon' => 'fa-graduation-cap',   'required' => true, 'hint' => 'PDF  · Maks. 1 MB'],
+        'ktp'                   => ['label' => 'Fotokopi KTP',                       'icon' => 'fa-id-card',          'required' => true, 'hint' => 'PDF  · Maks. 1 MB'],
+        'pas_foto'              => ['label' => 'Pas Foto Terbaru',                   'icon' => 'fa-image',            'required' => true, 'hint' => 'JPEG/PNG  · Maks. 1 MB'],
+        'str_sip'               => ['label' => 'STR (Wajib bagi Tenaga Kesehatan)',             'icon' => 'fa-file-medical',     'required' => false, 'hint' => 'PDF  · Maks. 1 MB'],
+        'sertifikat'            => ['label' => 'Sertifikat Pelatihan (Boleh Lebih dari 1)',  'icon' => 'fa-certificate',      'required' => false, 'hint' => 'PDF  · Maks. 1 MB'],
+        'surat_pengalaman'      => ['label' => 'Surat Pengalaman Kerja',             'icon' => 'fa-briefcase',        'required' => false, 'hint' => 'PDF  · Maks. 1 MB'],
+        'skck'                  => ['label' => 'SKCK',                               'icon' => 'fa-shield-halved',    'required' => true, 'hint' => 'PDF  · Maks. 1 MB'],
+        'surat_sehat'           => ['label' => 'Surat Keterangan Sehat',             'icon' => 'fa-stethoscope',      'required' => true, 'hint' => 'PDF  · Maks. 1 MB'],
+        'surat_pernyataan'      => ['label' => 'Surat Pernyataan Keaslian Dokumen', 'icon' => 'fa-file-signature',   'required' => true, 'hint' => 'PDF  · Maks. 1 MB'],
+        'surat_lamaran'         => ['label' => 'Surat Lamaran Pekerjaan',            'icon' => 'fa-file-signature',   'required' => true, 'hint' => 'PDF  · Maks. 1 MB'],
+
 
     ];
 
