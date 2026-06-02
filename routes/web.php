@@ -19,11 +19,11 @@ use Illuminate\Support\Facades\Response;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('coming');
+});
 
-Route::get('/', [PelamarController::class, 'tampil_halaman_pelamar'])->name('pelamar.form');
+// Route::get('/', [PelamarController::class, 'tampil_halaman_pelamar'])->name('pelamar.form');
 Route::post('/pelamar/store', [PelamarController::class, 'store'])->name('pelamar.store');
 Route::get('/pelamar/hasil/{token}', [PelamarController::class, 'hasil'])
     ->name('Pelamar.hasil');
