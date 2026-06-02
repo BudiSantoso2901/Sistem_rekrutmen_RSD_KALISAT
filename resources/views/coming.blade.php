@@ -101,7 +101,7 @@
             <span class="dot">.</span>
         </h1>
 
-        {{-- <p>Sistem sedang dipersiapkan.</p> --}}
+        <p>Sistem sedang dipersiapkan.</p>
     </div>
 
     <script>
