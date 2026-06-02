@@ -1391,7 +1391,7 @@
                     <div class="panel-sub">Berdasarkan jumlah pelamar</div>
                 </div>
             </div>
-            <div class="panel-body-0 posisi-list">
+            <div class="panel-body- posisi-list">
                 @php
                     $posisiRanked = $posisis
                         ->map(function ($p) use ($pelamars) {
@@ -1421,7 +1421,7 @@
         </div>
 
         {{-- Chart: Bar Pass Rate per Kuis --}}
-        <div class="panel">
+        {{-- <div class="panel">
             <div class="panel-header">
                 <div>
                     <div class="panel-title"><i class="fa-solid fa-chart-bar"></i> Pass Rate per Kuis</div>
@@ -1433,10 +1433,10 @@
                     <canvas id="chartPassRate"></canvas>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         {{-- Chart: Distribusi Status Pengerjaan --}}
-        <div class="panel">
+        {{-- <div class="panel">
             <div class="panel-header">
                 <div>
                     <div class="panel-title"><i class="fa-solid fa-list-check"></i> Status Pengerjaan Kuis</div>
@@ -1470,7 +1470,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 
 
