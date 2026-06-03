@@ -943,6 +943,7 @@ class PelamarController extends Controller
         'surat_sehat'           => ['label' => 'Surat Keterangan Sehat',             'icon' => 'fa-stethoscope',      'required' => true, 'hint' => 'PDF  · Maks. 1 MB'],
         'surat_pernyataan'      => ['label' => 'Surat Pernyataan Keaslian Dokumen', 'icon' => 'fa-file-signature',   'required' => true, 'hint' => 'PDF  · Maks. 1 MB'],
         'surat_lamaran'         => ['label' => 'Surat Lamaran Pekerjaan',            'icon' => 'fa-file-signature',   'required' => true, 'hint' => 'PDF  · Maks. 1 MB'],
+        'surat_tidak_menuntut_diangkat_asn'         => ['label' => 'Surat Pernyataan Tidak Menuntut Diangkat ASN',            'icon' => 'fa-file-signature',   'required' => true, 'hint' => 'PDF  · Maks. 1 MB'],
 
 
     ];
