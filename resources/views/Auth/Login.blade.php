@@ -481,7 +481,7 @@
 
         <div class="footer-note">
             &copy; {{ date('Y') }} <strong></strong> &mdash; Kabupaten Jember<br>
-            Hak akses dikelola oleh Tim IT RSD Kalisat.
+            Hak akses RSD Jember
         </div>
     </div>
 
