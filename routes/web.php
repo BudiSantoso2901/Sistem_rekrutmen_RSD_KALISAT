@@ -19,16 +19,16 @@ use Illuminate\Support\Facades\Response;
 |
 */
 
-// Route::get('/', function () {
-//     return view('coming');
-// });
+Route::get('/', function () {
+    return view('coming');
+});
 
-Route::get('/', [PelamarController::class, 'tampil_halaman_pelamar'])->name('pelamar.form');
-Route::post('/pelamar/store', [PelamarController::class, 'store'])->name('pelamar.store');
-Route::get('/pelamar/hasil/{token}', [PelamarController::class, 'hasil'])
-    ->name('Pelamar.hasil');
+// Route::get('/', [PelamarController::class, 'tampil_halaman_pelamar'])->name('pelamar.form');
+// Route::post('/pelamar/store', [PelamarController::class, 'store'])->name('pelamar.store');
+// Route::get('/pelamar/hasil/{token}', [PelamarController::class, 'hasil'])
+//     ->name('Pelamar.hasil');
 
-Route::get('/login', [AuthController::class, 'tampil_login'])->name('login');
+Route::get('/admin-login-rs/tampil', [AuthController::class, 'tampil_login'])->name('login');
 Route::post('/login-prosess', [AuthController::class, 'proses_login'])->name('login.proses');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/file/view/{id}', [PelamarController::class, 'viewFile'])

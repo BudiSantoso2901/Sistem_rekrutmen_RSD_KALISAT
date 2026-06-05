@@ -60,74 +60,96 @@ class PelamarExport implements
             'files',
             'rumahSakit'
         ])
-
             ->where(
                 'rumah_sakit_id',
                 $this->user->rumah_sakit_id
             )
-
             ->when(
                 $this->id_posisi,
                 function ($query) {
-
                     $query->where(
                         'id_posisi',
                         $this->id_posisi
                     );
                 }
             )
-
             ->when(
                 $this->status,
                 function ($query) {
-
                     $query->where(
                         'status_pelamar',
                         $this->status
                     );
                 }
             )
-
             ->latest()
-
             ->get()
-
             ->map(function ($pelamar) {
 
                 $uploaded = $pelamar
                     ->files
                     ->pluck('jenis_file')
+                    ->unique()
                     ->toArray();
 
-                $statusFile = function ($jenis)
-                use (
-                    $uploaded,
-                    $pelamar
-                ) {
+                /*
+            |--------------------------------------------------------------------------
+            | Status Upload File
+            |--------------------------------------------------------------------------
+            */
+                $statusFile = function ($jenis) use ($uploaded, $pelamar) {
 
                     if (
                         $jenis === 'str_sip'
-                        &&
-                        $pelamar->jenis_pelamar !== 'nakes'
+                        && $pelamar->jenis_pelamar !== 'nakes'
                     ) {
-
                         return '—';
                     }
 
-                    if (
-                        in_array(
-                            $jenis,
-                            $uploaded
-                        )
-                    ) {
+                    return in_array($jenis, $uploaded)
+                        ? '✔'
+                        : '✘';
+                };
 
-                        return '✔';
+                /*
+            |--------------------------------------------------------------------------
+            | Berkas Wajib
+            |--------------------------------------------------------------------------
+            */
+                $requiredFiles = [];
+
+                foreach (self::JENIS_FILE as $jenis => $config) {
+
+                    if (
+                        isset($config['required'])
+                        && $config['required'] === true
+                    ) {
+                        $requiredFiles[] = $jenis;
                     }
 
-                    return self::JENIS_FILE[$jenis]
-                        ? '✘'
-                        : '—';
-                };
+                    if (
+                        $jenis === 'str_sip'
+                        && $pelamar->jenis_pelamar === 'nakes'
+                    ) {
+                        $requiredFiles[] = $jenis;
+                    }
+                }
+
+                $requiredFiles = array_unique($requiredFiles);
+
+                /*
+            |--------------------------------------------------------------------------
+            | Cari Berkas Yang Belum Upload
+            |--------------------------------------------------------------------------
+            */
+                $missingFiles = array_diff(
+                    $requiredFiles,
+                    $uploaded
+                );
+
+                $berkasLengkap = empty($missingFiles)
+                    ? '✔ Lengkap'
+                    : '✘ Belum Lengkap';
 
                 return [
 
@@ -137,8 +159,8 @@ class PelamarExport implements
                     'Nama' =>
                     $pelamar->nama,
 
-                    'NIK' => "'" .
-                        $pelamar->nik,
+                    'NIK' =>
+                    "'" . $pelamar->nik,
 
                     'Jenis Kelamin' =>
                     $pelamar->jenis_kelamin,
@@ -153,13 +175,13 @@ class PelamarExport implements
                     $pelamar->usia,
 
                     'Jenis Pelamar' =>
-                    $pelamar->jenis_pelamar,
+                    strtoupper($pelamar->jenis_pelamar),
 
                     'Email' =>
                     $pelamar->email,
 
-                    'No HP' => '"' .
-                        $pelamar->no_hp,
+                    'No HP' =>
+                    "'" . $pelamar->no_hp,
 
                     'Kota Domisili' =>
                     $pelamar->kota_domisili,
@@ -170,11 +192,13 @@ class PelamarExport implements
                     'Alamat' =>
                     $pelamar->alamat,
 
-                    'no_ijasah' => "'" .
-                    $pelamar->no_ijasah,
+                    'No Ijazah' =>
+                    "'" . $pelamar->no_ijasah,
 
-                    'no_str' => "'" .
-                    $pelamar->no_str,
+                    'No STR' =>
+                    $pelamar->jenis_pelamar === 'nakes'
+                        ? "'" . $pelamar->no_str
+                        : '-',
 
                     'Pengalaman Kerja' =>
                     $pelamar->pengalaman_kerja,
@@ -186,14 +210,10 @@ class PelamarExport implements
                     $pelamar->catatan,
 
                     'Posisi' =>
-                    optional(
-                        $pelamar->posisi
-                    )->nama_posisi,
+                    optional($pelamar->posisi)->nama_posisi,
 
                     'Rumah Sakit' =>
-                    optional(
-                        $pelamar->rumahSakit
-                    )->nama_rs,
+                    optional($pelamar->rumahSakit)->nama_rs,
 
                     'Status' =>
                     $pelamar->status_pelamar,
@@ -201,7 +221,7 @@ class PelamarExport implements
                     'CV' =>
                     $statusFile('cv'),
 
-                    'Ijazah' =>
+                    'Ijazah & Transkrip' =>
                     $statusFile('ijazah_transkrip'),
 
                     'KTP' =>
@@ -235,6 +255,8 @@ class PelamarExport implements
                     $statusFile(
                         'surat_tidak_menuntut_diangkat_asn'
                     ),
+                    'Berkas Lengkap' =>
+                    $berkasLengkap,
                 ];
             });
     }
@@ -276,6 +298,7 @@ class PelamarExport implements
             'Surat Pernyataan',
             'Surat Lamaran',
             'Tidak Menuntut ASN',
+            'Berkas Lengkap',
         ];
     }
 

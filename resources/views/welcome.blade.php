@@ -1970,7 +1970,7 @@
                     berdedikasi yang siap memberikan pelayanan terbaik bagi masyarakat.
                 </p>
                 <div class="hero-btns">
-                    <a href="{{ route('login') }}" class="btn-primary"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="{{ url('/tutup') }}" class="btn-primary"><i class="fas fa-sign-in-alt"></i> Login</a>
                     <a href="#daftar" class="btn-outline"><i class="fas fa-paper-plane"></i> Daftar Sekarang</a>
                 </div>
                 <div class="hero-stats">

@@ -152,7 +152,7 @@
         <div class="card">
 
             <h1>
-                Coming Soon
+                TUTUP
                 <span class="dot">.</span>
                 <span class="dot">.</span>
                 <span class="dot">.</span>

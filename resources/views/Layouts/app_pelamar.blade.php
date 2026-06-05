@@ -1619,7 +1619,7 @@
                                 <div class="mc-lbl">Kelengkapan Wajib</div>
                                 @if ($progress >= 100)
                                     {{-- Tombol muncul hanya saat semua berkas wajib sudah lengkap --}}
-                                    <a href="{{ asset('file_template/12. TANDA TERIMA BERKAS PELAMAR2.docx') }}"
+                                    <a href="{{ asset('file_template/12. TANDA TERIMA BERKAS PELAMAR2.pdf') }}"
                                         class="btn-tanda-terima" title="Unduh Tanda Terima Berkas">
                                         <i class="fa-solid fa-file-arrow-down"></i>
                                         <span>Unduh Tanda Terima</span>
