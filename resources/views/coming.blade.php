@@ -152,7 +152,7 @@
         <div class="card">
 
             <h1>
-                TUTUP
+                PENDAFTARAN TUTUP
                 <span class="dot">.</span>
                 <span class="dot">.</span>
                 <span class="dot">.</span>
