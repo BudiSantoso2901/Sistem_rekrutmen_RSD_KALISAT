@@ -25,8 +25,8 @@ Route::get('/', function () {
 
 // Route::get('/', [PelamarController::class, 'tampil_halaman_pelamar'])->name('pelamar.form');
 // Route::post('/pelamar/store', [PelamarController::class, 'store'])->name('pelamar.store');
-// Route::get('/pelamar/hasil/{token}', [PelamarController::class, 'hasil'])
-//     ->name('Pelamar.hasil');
+Route::get('/pelamar/hasil/{token}', [PelamarController::class, 'hasil'])
+    ->name('Pelamar.hasil');
 
 Route::get('/admin-login-rs/tampil', [AuthController::class, 'tampil_login'])->name('login');
 Route::post('/login-prosess', [AuthController::class, 'proses_login'])->name('login.proses');
