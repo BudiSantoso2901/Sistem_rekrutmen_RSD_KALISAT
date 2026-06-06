@@ -151,12 +151,12 @@
 
         <div class="card">
 
-            <h1>
+            <h2>
                 PENDAFTARAN TUTUP
                 <span class="dot">.</span>
                 <span class="dot">.</span>
                 <span class="dot">.</span>
-            </h1>
+            </h2>
 
             {{-- <p class="subtitle">
                 Rekrutmen Pegawai RSD Kabupaten Jember

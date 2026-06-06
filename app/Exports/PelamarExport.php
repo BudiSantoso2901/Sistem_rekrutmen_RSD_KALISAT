@@ -255,8 +255,6 @@ class PelamarExport implements
                     $statusFile(
                         'surat_tidak_menuntut_diangkat_asn'
                     ),
-                    'Berkas Lengkap' =>
-                    $berkasLengkap,
                 ];
             });
     }
@@ -298,7 +296,6 @@ class PelamarExport implements
             'Surat Pernyataan',
             'Surat Lamaran',
             'Tidak Menuntut ASN',
-            'Berkas Lengkap',
         ];
     }
 
