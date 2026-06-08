@@ -28,7 +28,7 @@ Route::get('/', function () {
 Route::get('/pelamar/hasil/{token}', [PelamarController::class, 'hasil'])
     ->name('Pelamar.hasil');
 
-Route::get('/admin-login-rs/tampil', [AuthController::class, 'tampil_login'])->name('login');
+Route::get('/login-rs/halamanLogin', [AuthController::class, 'tampil_login'])->name('login');
 Route::post('/login-prosess', [AuthController::class, 'proses_login'])->name('login.proses');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/file/view/{id}', [PelamarController::class, 'viewFile'])
