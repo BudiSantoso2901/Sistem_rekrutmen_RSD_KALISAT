@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ScanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KuisController;
 use App\Http\Controllers\PelamarController;
@@ -19,12 +20,12 @@ use Illuminate\Support\Facades\Response;
 |
 */
 
-Route::get('/', function () {
-    return view('coming');
-});
+// Route::get('/', function () {
+//     return view('coming');
+// });
 
-// Route::get('/', [PelamarController::class, 'tampil_halaman_pelamar'])->name('pelamar.form');
-// Route::post('/pelamar/store', [PelamarController::class, 'store'])->name('pelamar.store');
+Route::get('/', [PelamarController::class, 'tampil_halaman_pelamar'])->name('pelamar.form');
+Route::post('/pelamar/store', [PelamarController::class, 'store'])->name('pelamar.store');
 Route::get('/pelamar/hasil/{token}', [PelamarController::class, 'hasil'])
     ->name('Pelamar.hasil');
 
