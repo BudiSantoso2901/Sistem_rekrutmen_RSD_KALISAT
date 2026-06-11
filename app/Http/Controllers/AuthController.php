@@ -85,13 +85,13 @@ class AuthController extends Controller
         // LOGIN PELAMAR
         // ==========================
 
-        if (Auth::guard('pelamar')->attempt($credentials)) {
+        // if (Auth::guard('pelamar')->attempt($credentials)) {
 
-            $request->session()->regenerate();
+        //     $request->session()->regenerate();
 
-            return redirect()
-                ->route('pelamar.dashboard');
-        }
+        //     return redirect()
+        //         ->route('pelamar.dashboard');
+        // }
 
         // ==========================
         // LOGIN GAGAL
