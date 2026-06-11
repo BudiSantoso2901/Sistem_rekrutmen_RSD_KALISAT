@@ -1593,14 +1593,14 @@
                                     {{ $pelamar->created_at->format('d M Y') }}</span>
                             </div>
                         </div>
-                        <div class="hero-right">
+                        {{-- <div class="hero-right">
                             @php $st = $pelamar->status_pelamar; @endphp
                             <div class="status-pill {{ $st }}">
                                 <i
                                     class="fa-solid fa-{{ $st === 'diterima' ? 'circle-check' : ($st === 'pending' ? 'clock' : 'user-check') }}"></i>
                                 {{ str_replace('_', ' ', ucwords($st, '_')) }}
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
                     {{-- Mini stats --}}
