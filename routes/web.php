@@ -43,6 +43,12 @@ Route::get('/faq-preview', function () {
 
     return Response::file($path);
 });
+Route::prefix('admin/scan')->name('admin.scan.')->group(function () {
+    Route::get('/',             [ScanController::class, 'index'])->name('index');
+    Route::get('/cari',         [ScanController::class, 'cari'])->name('cari');
+    Route::post('/cari',        [ScanController::class, 'cari'])->name('cari.post');  // fallback form POST
+    Route::get('/hasil/{token}', [ScanController::class, 'hasil'])->name('hasil');
+});
 
 Route::middleware(['auth'])->group(function () {
     // IT
@@ -86,6 +92,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/store',    [KuisController::class, 'soalStore'])->name('store');
             Route::delete('/{soalId}', [KuisController::class, 'soalDestroy'])->name('destroy');
         });
+
         Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
         Route::post('/profile/update', [AuthController::class, 'updatePassword'])->name('profile.update');
     });

@@ -1339,7 +1339,7 @@
 
                                     @if ($pasFoto)
                                         <img src="{{ $pasFoto->url }}" alt="Foto Pelamar" class="foto-pelamar"
-                                            width="100%" >
+                                            width="100%">
                                     @else
                                         <div class="foto-placeholder">
                                             Foto tidak tersedia
@@ -1439,8 +1439,12 @@
                                         <span class="kf-value">{{ $pelamar->keterangan_pengalaman }}</span>
                                     </div>
                                 @endif
-
-                                <div class="kf-divider"></div>
+                                <div class="kf-col-title">
+                                    <span>🔖</span> Kode QR
+                                </div>
+                                <div class="kf-row">
+                                    <div id="qrcode"></div>
+                                </div>
                             </div>
 
                         </div>{{-- /kf-body --}}
@@ -1454,12 +1458,6 @@
                             <div class="kf-footer-center">
                                 <span class="kf-footer-watermark">Dokumen ini sah sebagai bukti pendaftaran
                                     resmi</span>
-                            </div>
-                            <div class="kf-barcode">
-                                <div class="kf-barcode-bars" id="kfBarcode"
-                                    data-code="{{ $pelamar->nomer_peserta }}">
-                                </div>
-                                <svg id="barcode" width="20" height="10"></svg>
                             </div>
                         </div>
 
@@ -1476,20 +1474,17 @@
         </div>
 
     </div><!-- /wrapper -->
-    <script src="https://cdn.jsdelivr.net/npm/jsbarcode/dist/JsBarcode.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <script>
-        /* ── Generate barcode bars ── */
-        JsBarcode("#barcode",
-            "{{ $pelamar->nomer_peserta }}", {
-                format: "CODE128",
-                width: 1, // ketebalan garis (kecilkan)
-                height: 25, // tinggi barcode
-                displayValue: false, // sembunyikan teks bawah
-                margin: 0,
-                lineColor: "#000",
-                background: "transparent"
-            });
+        new QRCode(document.getElementById("qrcode"), {
+            text: "{{ $pelamar->nomer_peserta }}",
+            width: 120,
+            height: 120,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
 
         /* ── Modal ── */
         function openModal() {
