@@ -402,6 +402,75 @@
                 opacity: 0;
             }
         }
+
+        /* ── QR Scan Button ── */
+        .btn-scan-qr {
+            width: 100%;
+            margin-top: 12px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            text-decoration: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #c9922a 0%, #b67f1f 100%);
+            color: #fff;
+            box-shadow: 0 4px 18px rgba(201, 146, 42, .3);
+            transition: all .25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-scan-qr:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 146, 42, .4);
+            color: #fff;
+        }
+
+        .btn-scan-qr::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, .15),
+                    transparent);
+        }
+
+        .btn-scan-icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, .15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-scan-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.3;
+        }
+
+        .btn-scan-text small {
+            font-size: .72rem;
+            opacity: .9;
+            font-weight: 400;
+        }
+
+        .btn-scan-arrow {
+            font-size: 1rem;
+            transition: transform .25s ease;
+        }
+
+        .btn-scan-qr:hover .btn-scan-arrow {
+            transform: translateX(5px);
+        }
     </style>
 </head>
 
@@ -477,6 +546,16 @@
                 <span class="spinner" id="spinner"></span>
                 <span class="btn-text">Masuk</span>
             </button>
+            <a href="{{ route('admin.scan.index') }}" class="btn-scan-qr">
+                <span class="btn-scan-icon">
+                    <i class="fa-solid fa-qrcode"></i>
+                </span>
+                <span class="btn-scan-text">
+                    Check QR Code
+                    <small>Verifikasi Data Peserta</small>
+                </span>
+                <i class="fa-solid fa-arrow-right btn-scan-arrow"></i>
+            </a>
         </form>
 
         <div class="footer-note">
