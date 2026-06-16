@@ -881,7 +881,7 @@
             <div class="topbar-sub">{{ $pelamar->nomer_peserta }} ·
                 {{ $pelamar->rumahSakit->nama_rs ?? 'RS tidak ditemukan' }}</div>
         </div>
-        <span class="pill {{ $stMap['cls'] }} topbar-status">{{ $stMap['label'] }}</span>
+        {{-- <span class="pill {{ $stMap['cls'] }} topbar-status">{{ $stMap['label'] }}</span> --}}
     </div>
 
     <div class="main">
