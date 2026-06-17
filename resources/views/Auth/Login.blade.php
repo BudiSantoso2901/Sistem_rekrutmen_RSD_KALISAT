@@ -546,7 +546,7 @@
                 <span class="spinner" id="spinner"></span>
                 <span class="btn-text">Masuk</span>
             </button>
-            <a href="{{ route('admin.scan.index') }}" class="btn-scan-qr">
+            {{-- <a href="{{ route('admin.scan.index') }}" class="btn-scan-qr">
                 <span class="btn-scan-icon">
                     <i class="fa-solid fa-qrcode"></i>
                 </span>
@@ -555,7 +555,7 @@
                     <small>Verifikasi Data Peserta</small>
                 </span>
                 <i class="fa-solid fa-arrow-right btn-scan-arrow"></i>
-            </a>
+            </a> --}}
         </form>
 
         <div class="footer-note">
