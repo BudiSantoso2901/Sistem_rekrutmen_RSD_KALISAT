@@ -1064,20 +1064,44 @@ class PelamarController extends Controller
     {
         $pelamar = Auth::guard('pelamar')->user();
 
+        $posisi = $pelamar->posisi;
+
+        if (
+            $posisi &&
+            $posisi->tanggal_ditutup &&
+            Carbon::today()->gt(
+                Carbon::parse($posisi->tanggal_ditutup)
+            )
+        ) {
+
+            return response()->json([
+                'success' => false,
+                'message' => 'File tidak dapat dihapus karena masa pendaftaran telah berakhir.'
+            ], 422);
+        }
+
         if (!array_key_exists($jenis, self::JENIS_FILE)) {
-            return response()->json(['success' => false, 'message' => 'Jenis file tidak valid.'], 422);
+            return response()->json([
+                'success' => false,
+                'message' => 'Jenis file tidak valid.'
+            ], 422);
         }
 
         $file = PelamarFile::where('pelamar_id', $pelamar->id)
-            ->where('jenis_file', $jenis)->first();
+            ->where('jenis_file', $jenis)
+            ->first();
 
         if (!$file) {
-            return response()->json(['success' => false, 'message' => 'File tidak ditemukan.'], 404);
+            return response()->json([
+                'success' => false,
+                'message' => 'File tidak ditemukan.'
+            ], 404);
         }
 
         if (Storage::disk('public')->exists($file->file_path)) {
             Storage::disk('public')->delete($file->file_path);
         }
+
         $file->delete();
 
         return response()->json([
