@@ -1439,12 +1439,8 @@
                                         <span class="kf-value">{{ $pelamar->keterangan_pengalaman }}</span>
                                     </div>
                                 @endif
-                                <div class="kf-col-title">
-                                    <span>🔖</span> Kode QR
-                                </div>
-                                <div class="kf-row">
-                                    <div id="qrcode"></div>
-                                </div>
+
+                                <div class="kf-divider"></div>
                             </div>
 
                         </div>{{-- /kf-body --}}
@@ -1458,6 +1454,12 @@
                             <div class="kf-footer-center">
                                 <span class="kf-footer-watermark">Dokumen ini sah sebagai bukti pendaftaran
                                     resmi</span>
+                            </div>
+                            <div class="kf-barcode">
+                                <div class="kf-barcode-bars" id="kfBarcode"
+                                    data-code="{{ $pelamar->nomer_peserta }}">
+                                </div>
+                                <svg id="barcode" width="20" height="10"></svg>
                             </div>
                         </div>
 
@@ -1477,14 +1479,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <script>
-        new QRCode(document.getElementById("qrcode"), {
-            text: "{{ $pelamar->nomer_peserta }}",
-            width: 120,
-            height: 120,
-            colorDark: "#000000",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H
-        });
+        /* ── Generate barcode bars ── */
+        JsBarcode("#barcode",
+            "{{ $pelamar->nomer_peserta }}", {
+                format: "CODE128",
+                width: 1, // ketebalan garis (kecilkan)
+                height: 25, // tinggi barcode
+                displayValue: false, // sembunyikan teks bawah
+                margin: 0,
+                lineColor: "#000",
+                background: "transparent"
+            });
 
         /* ── Modal ── */
         function openModal() {
