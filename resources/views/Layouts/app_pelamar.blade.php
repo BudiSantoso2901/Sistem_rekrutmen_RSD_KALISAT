@@ -1741,7 +1741,7 @@
 
                     </div>
 
-                    @if ($pelamar->catatan)
+                    {{-- @if ($pelamar->catatan)
                         <div class="card" style="margin-top:0">
                             <div class="card-header">
                                 <div class="card-header-icon" style="background:#fdf3e3;color:var(--gold)"><i
@@ -1753,7 +1753,7 @@
                                 </p>
                             </div>
                         </div>
-                    @endif
+                    @endif --}}
 
                 </div>{{-- /secDashboard --}}
 
