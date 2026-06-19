@@ -43,12 +43,12 @@ Route::get('/faq-preview', function () {
 
     return Response::file($path);
 });
-// Route::prefix('admin/scan')->name('admin.scan.')->group(function () {
-//     Route::get('/',             [ScanController::class, 'index'])->name('index');
-//     Route::get('/cari',         [ScanController::class, 'cari'])->name('cari');
-//     Route::post('/cari',        [ScanController::class, 'cari'])->name('cari.post');  // fallback form POST
-//     Route::get('/hasil/{token}', [ScanController::class, 'hasil'])->name('hasil');
-// });
+Route::prefix('scan-kartu')->name('admin.scan.')->group(function () {
+    Route::get('/',             [ScanController::class, 'index'])->name('index');
+    Route::get('/cari',         [ScanController::class, 'cari'])->name('cari');
+    Route::post('/cari',        [ScanController::class, 'cari'])->name('cari.post');  // fallback form POST
+    Route::get('/hasil/{token}', [ScanController::class, 'hasil'])->name('hasil');
+});
 
 Route::middleware(['auth'])->group(function () {
     // IT
